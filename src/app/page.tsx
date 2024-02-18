@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button';
+import RecipeForm from '@/components/forms/Recipe/Index';
 
 export default function Home() {
   return (
-    <main className="">
-      <Button>Click me</Button>
+    <main>
+      <RecipeForm />
     </main>
   );
 }
