@@ -11,18 +11,19 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
+import { create } from '@/app/actions';
 
 function RecipeForm() {
   const form = useForm<z.infer<typeof recipeSchema>>({
     resolver: zodResolver(recipeSchema),
     defaultValues: {
-      ingredients: [{ name: '', quantity: '', metric: '' }],
+      ingredients: [{ name: '', quantity: 0, metric: '' }],
       instructions: [{ instruction: '' }],
     },
   });
 
   function onSubmit(values: z.infer<typeof recipeSchema>) {
-    console.log(values);
+    create(values);
   }
 
   return (
@@ -64,7 +65,13 @@ function RecipeForm() {
             <FormItem>
               <FormLabel>Cooking time</FormLabel>
               <FormControl>
-                <Input placeholder="cooking" type="number" min={0} {...field} />
+                <Input
+                  placeholder="cooking"
+                  type="number"
+                  min={0}
+                  {...field}
+                  onChange={(e) => field.onChange(parseInt(e.target.value))}
+                />
               </FormControl>
               <FormDescription>in minutes</FormDescription>
               <FormMessage />
@@ -79,7 +86,13 @@ function RecipeForm() {
             <FormItem>
               <FormLabel>preparation time</FormLabel>
               <FormControl>
-                <Input placeholder="preparation" type="number" min={0} {...field} />
+                <Input
+                  placeholder="preparation"
+                  type="number"
+                  min={0}
+                  {...field}
+                  onChange={(e) => field.onChange(parseInt(e.target.value))}
+                />
               </FormControl>
               <FormDescription>in minutes</FormDescription>
               <FormMessage />
@@ -94,7 +107,13 @@ function RecipeForm() {
             <FormItem>
               <FormLabel>portion size</FormLabel>
               <FormControl>
-                <Input placeholder="portion" type="number" min={0} {...field} />
+                <Input
+                  placeholder="portion"
+                  type="number"
+                  min={0}
+                  {...field}
+                  onChange={(e) => field.onChange(parseInt(e.target.value))}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -119,7 +138,7 @@ function RecipeForm() {
 
         <FormField
           control={form.control}
-          name="body"
+          name="images"
           render={({ field }) => (
             <FormItem>
               <FormLabel>

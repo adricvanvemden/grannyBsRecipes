@@ -33,7 +33,13 @@ const Ingredients: React.FC<{
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Quantity" type="number" min={0} {...field} />
+                  <Input
+                    placeholder="Quantity"
+                    type="number"
+                    min={0}
+                    {...field}
+                    onChange={(e) => field.onChange(parseInt(e.target.value))}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

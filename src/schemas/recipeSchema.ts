@@ -17,7 +17,6 @@ const recipeSchema = z.object({
   cookingTime: z.number(),
   preparationTime: z.number(),
   portions: z.number(),
-  portionSize: z.string(),
   body: z.string().optional(),
   images: z.array(z.string()).optional(),
 });
