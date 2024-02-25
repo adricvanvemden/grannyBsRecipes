@@ -1,9 +1,14 @@
-import RecipeForm from '@/components/forms/Recipe/Index';
+import Card from '@/components/ui/card';
+import { getRecipes } from './actions';
 
-export default function Home() {
+export default async function Home() {
+  const recipes = await getRecipes();
+
   return (
-    <main>
-      <RecipeForm />
-    </main>
+    <div>
+      {recipes.map((recipe) => (
+        <Card key={recipe.slug} {...recipe} href={`/recipe/${recipe.slug}`} />
+      ))}
+    </div>
   );
 }

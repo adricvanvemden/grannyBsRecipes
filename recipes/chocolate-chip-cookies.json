@@ -1,0 +1,14 @@
+{
+    "title": "Chocolate Chip Cookies",
+    "shortDescription": "Classic chocolate chip cookies for a sweet treat.",
+    "instructions": [{"instruction": "Preheat oven to 180°C. Mix ingredients. Bake for 10-12 minutes."}],
+    "ingredients": [{"name": "Chocolate Chips", "quantity": 100, "metric": "grams"}],
+    "cookingTime": 12,
+    "preparationTime": 15,
+    "portions": 24,
+    "body": "Classic chocolate chip cookie recipe that's simple and delicious.",
+    "images": [],
+    "slug": "/chocolate-chip-cookies",
+    "tags": ["Dessert", "Cookies", "Baking"],
+    "author": "AI Chef"
+  }

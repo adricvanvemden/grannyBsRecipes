@@ -13,6 +13,8 @@ import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import { create } from '@/app/actions';
 import { toast } from 'sonner';
+import { FancyMultiSelect } from '@/components/FancyMultiSelect';
+import { COOKING_METHOD_TAGS, CUISINE_TAGS, DIETARY_TAGS, MEAL_TYPE_TAGS } from '@/app/Constants';
 
 function RecipeForm() {
   const form = useForm<z.infer<typeof recipeSchema>>({
@@ -21,11 +23,16 @@ function RecipeForm() {
       ingredients: [{ name: '', quantity: 0, metric: '' }],
       instructions: [{ instruction: '' }],
       title: '',
+      shortDescription: '',
       cookingTime: 0,
       preparationTime: 0,
       portions: 0,
       body: '',
       images: [],
+      cuisineTags: [],
+      mealTypeTags: [],
+      dietaryTags: [],
+      cookingMethodTags: [],
     },
   });
 
@@ -51,6 +58,20 @@ function RecipeForm() {
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input placeholder="Title" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="shortDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Short description</FormLabel>
+              <FormControl>
+                <Textarea placeholder="short description" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -127,6 +148,86 @@ function RecipeForm() {
                   min={0}
                   {...field}
                   onChange={(e) => field.onChange(parseInt(e.target.value))}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="cuisineTags"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select Cuisine</FormLabel>
+              <FormControl>
+                <FancyMultiSelect
+                  options={CUISINE_TAGS}
+                  placeholder="Search cuisine..."
+                  onChange={(values) => {
+                    field.onChange(values.map(({ value }) => value));
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="mealTypeTags"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select mealtype</FormLabel>
+              <FormControl>
+                <FancyMultiSelect
+                  options={MEAL_TYPE_TAGS}
+                  placeholder="Search mealtype..."
+                  onChange={(values) => {
+                    field.onChange(values.map(({ value }) => value));
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="dietaryTags"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select mealtype</FormLabel>
+              <FormControl>
+                <FancyMultiSelect
+                  options={DIETARY_TAGS}
+                  placeholder="Search diettype..."
+                  onChange={(values) => {
+                    field.onChange(values.map(({ value }) => value));
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="cookingMethodTags"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select cooking method</FormLabel>
+              <FormControl>
+                <FancyMultiSelect
+                  options={COOKING_METHOD_TAGS}
+                  placeholder="Search cooking method..."
+                  onChange={(values) => {
+                    field.onChange(values.map(({ value }) => value));
+                  }}
                 />
               </FormControl>
               <FormMessage />

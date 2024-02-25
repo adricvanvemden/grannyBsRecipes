@@ -1,0 +1,14 @@
+{
+    "title": "Vegetable Stir-Fry",
+    "shortDescription": "Quick and healthy vegetable stir-fry.",
+    "instructions": [{"instruction": "Heat oil, sauté veggies, add sauce, stir-fry for 5 minutes."}],
+    "ingredients": [{"name": "Mixed Vegetables", "quantity": 200, "metric": "grams"}],
+    "cookingTime": 15,
+    "preparationTime": 10,
+    "portions": 4,
+    "body": "A quick and nutritious vegetable stir-fry for a delightful dinner.",
+    "images": [],
+    "slug": "/vegetable-stir-fry",
+    "tags": ["Dinner", "Vegetarian", "Stir-Fry"],
+    "author": "AI Chef"
+  }

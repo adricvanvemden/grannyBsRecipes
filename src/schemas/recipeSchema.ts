@@ -8,6 +8,7 @@ const ingredientSchema = z.object({
 
 const recipeSchema = z.object({
   title: z.string().min(2).max(50),
+  shortDescription: z.string().min(2).max(100),
   instructions: z
     .array(z.object({ instruction: z.string().min(1) }))
     .nonempty()
@@ -19,6 +20,10 @@ const recipeSchema = z.object({
   portions: z.number(),
   body: z.string().optional(),
   images: z.array(z.string()).optional(),
+  cuisineTags: z.array(z.string()).optional(),
+  mealTypeTags: z.array(z.string()).optional(),
+  dietaryTags: z.array(z.string()).optional(),
+  cookingMethodTags: z.array(z.string()).optional(),
 });
 
 export default recipeSchema;
