@@ -12,6 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import { create } from '@/app/actions';
+import { toast } from 'sonner';
 
 function RecipeForm() {
   const form = useForm<z.infer<typeof recipeSchema>>({
@@ -19,11 +20,24 @@ function RecipeForm() {
     defaultValues: {
       ingredients: [{ name: '', quantity: 0, metric: '' }],
       instructions: [{ instruction: '' }],
+      title: '',
+      cookingTime: 0,
+      preparationTime: 0,
+      portions: 0,
+      body: '',
+      images: [],
     },
   });
 
-  function onSubmit(values: z.infer<typeof recipeSchema>) {
-    create(values);
+  async function onSubmit(values: z.infer<typeof recipeSchema>) {
+    const { success, message } = await create(values);
+
+    if (success) {
+      toast.success('Recipe has been created');
+      form.reset({});
+    } else {
+      toast.error('Error: Recipe could not be created', { description: message });
+    }
   }
 
   return (
