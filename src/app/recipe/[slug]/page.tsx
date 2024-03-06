@@ -3,9 +3,13 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import recipeSchema from '@/schemas/recipeSchema';
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { BackButton } from '@/components/BackButton';
 import { Badge } from '@/components/ui/badge';
+import TimeAndServing from './components/TimeAndServing';
+import IngredientsList from './components/IngredientsList';
+import TagSection from './components/TagSection';
+import InstructionsList from './components/InstructiontsList';
 
 export async function generateStaticParams() {
   const slugs = await getRecipeSlugs();
@@ -40,47 +44,27 @@ export default async function RecipePage({ params }: { params: { slug: string } 
   return (
     <div className="prose container my-12">
       <BackButton />
-      <h1>{title}</h1>
-      <p>{shortDescription}</p>
-      <div className="flex flex-col gap-2">
-        {cuisineTags?.map((tag, index) => (
-          <Badge key={index} variant="secondary" className="mr-2 w-fit">
-            {tag}
-          </Badge>
-        ))}
-        {cookingMethodTags?.map((tag, index) => (
-          <Badge key={index} variant="secondary" className="mr-2 w-fit bg-slate-400">
-            {tag}
-          </Badge>
-        ))}
-        {dietaryTags?.map((tag, index) => (
-          <Badge key={index} variant="secondary" className="mr-2 w-fit bg-slate-600">
-            {tag}
-          </Badge>
-        ))}
-        {mealTypeTags?.map((tag, index) => (
-          <Badge key={index} variant="secondary" className="mr-2 w-fit bg-slate-800">
-            {tag}
-          </Badge>
-        ))}
+
+      <h1 className="mb-0">{title}</h1>
+      <hr className="my-2" />
+      <p className="my-4">{shortDescription}</p>
+
+      <div className="flex gap-2 flex-wrap">
+        <TagSection title="Cuisine" tags={cuisineTags} />
+        <TagSection title="Cooking Method" tags={cookingMethodTags} />
+        <TagSection title="Dietary" tags={dietaryTags} />
+        <TagSection title="Type" tags={mealTypeTags} />
       </div>
-      <h2>Instructions</h2>
-      <ol>
-        {instructions.map((instruction, index) => (
-          <li key={index}>{instruction.instruction}</li>
-        ))}
-      </ol>
+
+      <TimeAndServing preparationTime={preparationTime} cookingTime={cookingTime} portions={portions} />
+
       <h2>Ingredients</h2>
-      <ul>
-        {ingredients.map((ingredient, index) => (
-          <li key={index}>
-            {ingredient.quantity} {ingredient.metric} {ingredient.name}
-          </li>
-        ))}
-      </ul>
-      <p>Cooking Time: {cookingTime} minutes</p>
-      <p>Preparation Time: {preparationTime} minutes</p>
-      <p>Portions: {portions}</p>
+      <IngredientsList title="For the crust" ingredients={ingredients} />
+      <IngredientsList title="For the patty" ingredients={ingredients} />
+
+      <h2>Instructions</h2>
+      <InstructionsList instructions={instructions} />
+
       {body && <p>{body}</p>}
       {images && images.map((image, index) => <Image key={index} src={image} alt="" />)}
     </div>
