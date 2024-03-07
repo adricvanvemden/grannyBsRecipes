@@ -10,6 +10,7 @@ import TimeAndServing from './components/TimeAndServing';
 import IngredientsList from './components/IngredientsList';
 import TagSection from './components/TagSection';
 import InstructionsList from './components/InstructiontsList';
+import Author from './components/Author';
 
 export async function generateStaticParams() {
   const slugs = await getRecipeSlugs();
@@ -39,6 +40,7 @@ export default async function RecipePage({ params }: { params: { slug: string } 
     portions,
     body,
     images,
+    author,
   } = recipe;
 
   return (
@@ -47,6 +49,7 @@ export default async function RecipePage({ params }: { params: { slug: string } 
 
       <h1 className="mb-0">{title}</h1>
       <hr className="my-2" />
+      <Author name={author} />
       <p className="my-4">{shortDescription}</p>
 
       <div className="flex gap-2 flex-wrap">
@@ -58,12 +61,15 @@ export default async function RecipePage({ params }: { params: { slug: string } 
 
       <TimeAndServing preparationTime={preparationTime} cookingTime={cookingTime} portions={portions} />
 
-      <h2>Ingredients</h2>
-      <IngredientsList title="For the crust" ingredients={ingredients} />
-      <IngredientsList title="For the patty" ingredients={ingredients} />
+      <h2 className="!mb-4">Ingredients</h2>
+      {ingredients.map((ingredient, index) => (
+        <IngredientsList key={index} title={ingredient.title} ingredients={ingredient.ingredients} index={index} />
+      ))}
 
-      <h2>Instructions</h2>
-      <InstructionsList instructions={instructions} />
+      <h2 className="!mb-4">Instructions</h2>
+      {instructions.map((instruction, index) => (
+        <InstructionsList key={index} title={instruction.title} instructions={instruction.instructions} index={index} />
+      ))}
 
       {body && <p>{body}</p>}
       {images && images.map((image, index) => <Image key={index} src={image} alt="" />)}

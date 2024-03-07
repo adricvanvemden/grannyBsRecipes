@@ -16,12 +16,15 @@ import { toast } from 'sonner';
 import { FancyMultiSelect } from '@/components/FancyMultiSelect';
 import { COOKING_METHOD_TAGS, CUISINE_TAGS, DIETARY_TAGS, MEAL_TYPE_TAGS } from '@/app/Constants';
 
+
+export type RecipeFormValues = z.infer<typeof recipeSchema>;
+
 function RecipeForm() {
-  const form = useForm<z.infer<typeof recipeSchema>>({
+  const form = useForm<RecipeFormValues>({
     resolver: zodResolver(recipeSchema),
     defaultValues: {
-      ingredients: [{ name: '', quantity: 0, metric: '' }],
-      instructions: [{ instruction: '' }],
+      instructions: [{ title: '', instructions: [{ instruction: '' }] }],
+      ingredients: [{ title: '', ingredients: [{ name: '', quantity: 0, metric: '' }] }],
       title: '',
       shortDescription: '',
       cookingTime: 0,
@@ -33,6 +36,8 @@ function RecipeForm() {
       mealTypeTags: [],
       dietaryTags: [],
       cookingMethodTags: [],
+      slug: '',
+      author: '',
     },
   });
 
@@ -71,7 +76,7 @@ function RecipeForm() {
             <FormItem>
               <FormLabel>Short description</FormLabel>
               <FormControl>
-                <Textarea placeholder="short description" {...field} />
+                <Textarea placeholder="Short description" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -101,7 +106,7 @@ function RecipeForm() {
               <FormLabel>Cooking time</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="cooking"
+                  placeholder="Cooking time"
                   type="number"
                   min={0}
                   {...field}
@@ -119,10 +124,10 @@ function RecipeForm() {
           name="preparationTime"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>preparation time</FormLabel>
+              <FormLabel>Preparation time</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="preparation"
+                  placeholder="Preparation time"
                   type="number"
                   min={0}
                   {...field}
@@ -140,10 +145,10 @@ function RecipeForm() {
           name="portions"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>portion size</FormLabel>
+              <FormLabel>Portion size</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="portion"
+                  placeholder="Portion size"
                   type="number"
                   min={0}
                   {...field}
@@ -180,11 +185,11 @@ function RecipeForm() {
           name="mealTypeTags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select mealtype</FormLabel>
+              <FormLabel>Select Meal Type</FormLabel>
               <FormControl>
                 <FancyMultiSelect
                   options={MEAL_TYPE_TAGS}
-                  placeholder="Search mealtype..."
+                  placeholder="Search meal type..."
                   onChange={(values) => {
                     field.onChange(values.map(({ value }) => value));
                   }}
@@ -200,11 +205,11 @@ function RecipeForm() {
           name="dietaryTags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select mealtype</FormLabel>
+              <FormLabel>Select Dietary Type</FormLabel>
               <FormControl>
                 <FancyMultiSelect
                   options={DIETARY_TAGS}
-                  placeholder="Search diettype..."
+                  placeholder="Search dietary type..."
                   onChange={(values) => {
                     field.onChange(values.map(({ value }) => value));
                   }}
@@ -220,7 +225,7 @@ function RecipeForm() {
           name="cookingMethodTags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select cooking method</FormLabel>
+              <FormLabel>Select Cooking Method</FormLabel>
               <FormControl>
                 <FancyMultiSelect
                   options={COOKING_METHOD_TAGS}
@@ -241,10 +246,10 @@ function RecipeForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                body <span className="text-gray-400 text-xs">(optional)</span>
+                Body <span className="text-gray-400 text-xs">(optional)</span>
               </FormLabel>
               <FormControl>
-                <Textarea placeholder="body" {...field} />
+                <Textarea placeholder="Body" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

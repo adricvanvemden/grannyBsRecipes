@@ -32,7 +32,6 @@ export const DIETARY_TAGS = [
   { value: 'low-carb', label: 'Low-Carb' },
   { value: 'keto', label: 'Keto' },
   { value: 'paleo', label: 'Paleo' },
-  { value: 'nut-free', label: 'Nut-Free' },
   { value: 'egg-free', label: 'Egg-Free' },
   { value: 'nut-free', label: 'Nut-Free' },
 ];

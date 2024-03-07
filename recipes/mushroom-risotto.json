@@ -1,0 +1,69 @@
+{
+  "title": "Mushroom Risotto",
+  "shortDescription": "A creamy and savory Italian rice dish with flavorful mushrooms.",
+  "instructions": [
+    {
+      "title": "Prepare Mushroom Mix",
+      "instructions": [
+        { "instruction": "Clean and slice the mushrooms." },
+        { "instruction": "In a pan, sauté chopped garlic in olive oil until fragrant." },
+        { "instruction": "Add the sliced mushrooms and cook until they release their moisture." },
+        { "instruction": "Season with salt and pepper. Set aside." }
+      ]
+    },
+    {
+      "title": "Cooking Risotto",
+      "instructions": [
+        { "instruction": "In a separate pan, heat chicken or vegetable broth. Keep it warm." },
+        { "instruction": "In a large skillet, sauté finely chopped onion in olive oil until translucent." },
+        { "instruction": "Add Arborio rice to the skillet and cook until lightly toasted." },
+        { "instruction": "Begin adding the warm broth gradually, stirring frequently. Allow the liquid to be absorbed before adding more." },
+        { "instruction": "Continue this process until the rice is creamy and cooked to al dente texture." }
+      ]
+    },
+    {
+      "title": "Finish and Serve",
+      "instructions": [
+        { "instruction": "Stir in the prepared mushroom mix into the risotto." },
+        { "instruction": "Add grated Parmesan cheese and chopped fresh parsley. Season with salt and pepper to taste." },
+        { "instruction": "Serve the mushroom risotto hot, garnished with additional Parmesan and parsley." }
+      ]
+    }
+  ],
+  "ingredients": [
+    {
+      "title": "Mushroom Mix",
+      "ingredients": [
+        { "name": "Mushrooms", "quantity": 250, "metric": "grams, sliced" },
+        { "name": "Garlic", "quantity": 2, "metric": "cloves, chopped" },
+        { "name": "Olive oil", "quantity": 30, "metric": "milliliters" },
+        { "name": "Salt", "quantity": 5, "metric": "grams" },
+        { "name": "Pepper", "quantity": 5, "metric": "grams" }
+      ]
+    },
+    {
+      "title": "Risotto",
+      "ingredients": [
+        { "name": "Arborio rice", "quantity": 300, "metric": "grams" },
+        { "name": "Onion", "quantity": 1, "metric": "medium, finely chopped" },
+        { "name": "Chicken or vegetable broth", "quantity": 1, "metric": "liter, warm" },
+        { "name": "Olive oil", "quantity": 30, "metric": "milliliters" },
+        { "name": "Parmesan cheese", "quantity": 50, "metric": "grams, grated" },
+        { "name": "Fresh parsley", "quantity": 2, "metric": "tablespoons, chopped" },
+        { "name": "Salt", "quantity": 5, "metric": "grams" },
+        { "name": "Pepper", "quantity": 5, "metric": "grams" }
+      ]
+    }
+  ],
+  "cookingTime": 40,
+  "preparationTime": 20,
+  "portions": 4,
+  "body": "Mushroom Risotto is a comforting and creamy Italian dish that highlights the earthy flavor of mushrooms combined with the richness of Arborio rice. This recipe offers a delightful balance of textures and tastes, making it a perfect choice for a cozy dinner. Enjoy the warmth and satisfaction of homemade Mushroom Risotto!",
+  "images": [],
+  "cuisineTags": ["Italian"],
+  "mealTypeTags": ["Dinner"],
+  "dietaryTags": ["Vegetarian"],
+  "cookingMethodTags": ["Stovetop"],
+  "slug": "mushroom-risotto",
+  "author": "ChatGPT"
+}

@@ -1,29 +1,41 @@
 import { z } from 'zod';
 
-const ingredientSchema = z.object({
-  name: z.string().min(1),
-  quantity: z.number().min(0),
+const Instruction = z.object({
+  instruction: z.string(),
+});
+
+const InstructionSet = z.object({
+  title: z.string(),
+  instructions: z.array(Instruction),
+});
+
+const Ingredient = z.object({
+  name: z.string(),
+  quantity: z.number(),
   metric: z.string(),
 });
 
-const recipeSchema = z.object({
-  title: z.string().min(2).max(50),
-  shortDescription: z.string().min(2).max(100),
-  instructions: z
-    .array(z.object({ instruction: z.string().min(1) }))
-    .nonempty()
-    .min(1)
-    .max(100),
-  ingredients: z.array(ingredientSchema).nonempty().min(1).max(100),
+const IngredientSet = z.object({
+  title: z.string(),
+  ingredients: z.array(Ingredient),
+});
+
+const RecipeSchema = z.object({
+  title: z.string(),
+  shortDescription: z.string(),
+  instructions: z.array(InstructionSet),
+  ingredients: z.array(IngredientSet),
   cookingTime: z.number(),
   preparationTime: z.number(),
   portions: z.number(),
-  body: z.string().optional(),
-  images: z.array(z.string()).optional(),
-  cuisineTags: z.array(z.string()).optional(),
-  mealTypeTags: z.array(z.string()).optional(),
-  dietaryTags: z.array(z.string()).optional(),
-  cookingMethodTags: z.array(z.string()).optional(),
+  body: z.string(),
+  images: z.array(z.string()),
+  cuisineTags: z.array(z.string()),
+  mealTypeTags: z.array(z.string()),
+  dietaryTags: z.array(z.string()),
+  cookingMethodTags: z.array(z.string()),
+  slug: z.string(),
+  author: z.string(),
 });
 
-export default recipeSchema;
+export default RecipeSchema;
