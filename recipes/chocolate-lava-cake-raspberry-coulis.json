@@ -1,0 +1,71 @@
+{
+  "title": "Chocolate Lava Cake with Raspberry Coulis",
+  "shortDescription": "Indulge in the rich, gooey center of these decadent chocolate lava cakes, complemented by a tangy raspberry coulis.",
+  "instructions": [
+    {
+      "title": "Prepare Chocolate Lava Cake Batter",
+      "instructions": [
+        { "instruction": "Preheat your oven to 200°C (392°F). Grease four ramekins with butter and dust with cocoa powder." },
+        { "instruction": "In a heatproof bowl, melt 200 grams of high-quality dark chocolate and 150 grams of unsalted butter over a double boiler. Stir until smooth." },
+        { "instruction": "In a separate bowl, whisk together 3 large eggs, 3 egg yolks, and 100 grams of granulated sugar until well combined." },
+        { "instruction": "Gently fold the melted chocolate mixture into the egg mixture until just combined." },
+        { "instruction": "Finally, sift in 50 grams of all-purpose flour and fold until the batter is smooth." }
+      ]
+    },
+    {
+      "title": "Fill Ramekins and Bake",
+      "instructions": [
+        { "instruction": "Pour the batter evenly into the prepared ramekins." },
+        { "instruction": "Bake in the preheated oven for 10-12 minutes, or until the edges are set but the center remains soft." },
+        { "instruction": "Remove from the oven and let the cakes cool for a minute before gently running a knife around the edges and inverting them onto serving plates." }
+      ]
+    },
+    {
+      "title": "Prepare Raspberry Coulis",
+      "instructions": [
+        { "instruction": "In a blender, combine 150 grams of fresh raspberries and 2 tablespoons of powdered sugar. Blend until smooth." },
+        { "instruction": "Strain the mixture through a fine mesh sieve to remove seeds." },
+        { "instruction": "Chill the raspberry coulis in the refrigerator until ready to serve." }
+      ]
+    },
+    {
+      "title": "Serve and Enjoy",
+      "instructions": [
+        { "instruction": "Place each chocolate lava cake on a serving plate." },
+        { "instruction": "Drizzle the tops with the raspberry coulis and garnish with fresh raspberries and a dusting of powdered sugar." },
+        { "instruction": "Serve immediately, and enjoy the heavenly combination of warm chocolate lava with the tartness of raspberry coulis." }
+      ]
+    }
+  ],
+  "ingredients": [
+    {
+      "title": "Chocolate Lava Cake",
+      "ingredients": [
+        { "name": "Dark chocolate", "quantity": 200, "metric": "grams" },
+        { "name": "Unsalted butter", "quantity": 150, "metric": "grams" },
+        { "name": "Eggs", "quantity": 3, "metric": "large" },
+        { "name": "Egg yolks", "quantity": 3, "metric": "large" },
+        { "name": "Granulated sugar", "quantity": 100, "metric": "grams" },
+        { "name": "All-purpose flour", "quantity": 50, "metric": "grams" }
+      ]
+    },
+    {
+      "title": "Raspberry Coulis",
+      "ingredients": [
+        { "name": "Fresh raspberries", "quantity": 150, "metric": "grams" },
+        { "name": "Powdered sugar", "quantity": 2, "metric": "tablespoons" }
+      ]
+    }
+  ],
+  "cookingTime": 12,
+  "preparationTime": 20,
+  "portions": 4,
+  "body": "Indulge in a taste of luxury with these Chocolate Lava Cakes. The exterior is perfectly baked, creating a delicate shell that gives way to a gooey, molten center. Paired with a luscious Raspberry Coulis, this dessert is a symphony of rich chocolate and vibrant fruit flavors. Treat yourself and your guests to a divine culinary experience!",
+  "images": [],
+  "cuisineTags": ["Dessert"],
+  "mealTypeTags": ["Dessert"],
+  "dietaryTags": ["Vegetarian"],
+  "cookingMethodTags": ["Baking"],
+  "slug": "chocolate-lava-cake-raspberry-coulis",
+  "author": "ChatGPT"
+}

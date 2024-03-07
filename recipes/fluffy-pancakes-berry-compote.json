@@ -1,0 +1,72 @@
+{
+    "title": "Fluffy Pancakes with Berry Compote",
+    "shortDescription": "Enjoy a delicious morning with these light and fluffy pancakes topped with a vibrant berry compote.",
+    "instructions": [
+      {
+        "title": "Prepare Pancake Batter",
+        "instructions": [
+          { "instruction": "In a mixing bowl, combine 250 grams of all-purpose flour, 2 tablespoons of sugar, 2 teaspoons of baking powder, and a pinch of salt." },
+          { "instruction": "In a separate bowl, whisk together 2 large eggs, 375 milliliters of milk, and 60 milliliters of melted butter." },
+          { "instruction": "Pour the wet ingredients into the dry ingredients and gently mix until just combined. Be careful not to overmix; lumps are okay." }
+        ]
+      },
+      {
+        "title": "Cook Pancakes",
+        "instructions": [
+          { "instruction": "Preheat a griddle or non-stick skillet over medium heat. Lightly grease with butter or cooking spray." },
+          { "instruction": "Pour 1/4 cup (60 milliliters) of batter onto the griddle for each pancake. Cook until bubbles form on the surface, then flip and cook the other side until golden brown." },
+          { "instruction": "Repeat until all the batter is used, keeping cooked pancakes warm in a low-temperature oven." }
+        ]
+      },
+      {
+        "title": "Prepare Berry Compote",
+        "instructions": [
+          { "instruction": "In a saucepan, combine 200 grams of mixed berries (strawberries, blueberries, raspberries) with 60 grams of sugar and 1 tablespoon of lemon juice." },
+          { "instruction": "Simmer over medium heat until the berries break down and the mixture thickens slightly, about 10 minutes. Stir occasionally." },
+          { "instruction": "Remove from heat and let it cool for a few minutes." }
+        ]
+      },
+      {
+        "title": "Serve and Enjoy",
+        "instructions": [
+          { "instruction": "Stack the fluffy pancakes on a plate and generously spoon the warm berry compote over the top." },
+          { "instruction": "Optional: Drizzle with maple syrup and garnish with fresh mint leaves for an extra burst of flavor." },
+          { "instruction": "Serve immediately and savor the deliciousness of your homemade pancakes with berry compote." }
+        ]
+      }
+    ],
+    "ingredients": [
+      {
+        "title": "Pancakes",
+        "ingredients": [
+          { "name": "All-purpose flour", "quantity": 250, "metric": "grams" },
+          { "name": "Sugar", "quantity": 2, "metric": "tablespoons" },
+          { "name": "Baking powder", "quantity": 2, "metric": "teaspoons" },
+          { "name": "Salt", "quantity": 1, "metric": "pinch" },
+          { "name": "Eggs", "quantity": 2, "metric": "large" },
+          { "name": "Milk", "quantity": 375, "metric": "milliliters" },
+          { "name": "Butter", "quantity": 60, "metric": "milliliters" }
+        ]
+      },
+      {
+        "title": "Berry Compote",
+        "ingredients": [
+          { "name": "Mixed berries", "quantity": 200, "metric": "grams (strawberries, blueberries, raspberries)" },
+          { "name": "Sugar", "quantity": 60, "metric": "grams" },
+          { "name": "Lemon juice", "quantity": 1, "metric": "tablespoon" }
+        ]
+      }
+    ],
+    "cookingTime": 20,
+    "preparationTime": 15,
+    "portions": 4,
+    "body": "Start your day on a delicious note with these Fluffy Pancakes topped with a vibrant and sweet berry compote. The light and airy texture of the pancakes combined with the burst of berry flavors make this breakfast a treat for your taste buds. Whip up this simple and delightful recipe for a memorable morning feast!",
+    "images": [],
+    "cuisineTags": ["American"],
+    "mealTypeTags": ["Breakfast"],
+    "dietaryTags": ["Vegetarian"],
+    "cookingMethodTags": ["Griddle"],
+    "slug": "fluffy-pancakes-berry-compote",
+    "author": "ChatGPT"
+  }
+  
