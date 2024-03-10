@@ -3,9 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import recipeSchema from '@/schemas/recipeSchema';
 import { z } from 'zod';
-import { Checkbox } from '@/components/ui/checkbox';
 import { BackButton } from '@/components/BackButton';
-import { Badge } from '@/components/ui/badge';
 import TimeAndServing from './components/TimeAndServing';
 import IngredientsList from './components/IngredientsList';
 import TagSection from './components/TagSection';
@@ -44,10 +42,10 @@ export default async function RecipePage({ params }: { params: { slug: string } 
   } = recipe;
 
   return (
-    <div className="prose container my-12">
+    <div className="prose max-w-[1200px] container my-12">
       <BackButton />
 
-      <h1 className="mb-0">{title}</h1>
+      <h1 className="mb-0 text-2xl md:text-4xl">{title}</h1>
       <hr className="my-2" />
       <Author name={author} />
       <p className="my-4">{shortDescription}</p>
@@ -60,16 +58,25 @@ export default async function RecipePage({ params }: { params: { slug: string } 
       </div>
 
       <TimeAndServing preparationTime={preparationTime} cookingTime={cookingTime} portions={portions} />
-
-      <h2 className="!mb-4">Ingredients</h2>
-      {ingredients.map((ingredient, index) => (
-        <IngredientsList key={index} title={ingredient.title} ingredients={ingredient.ingredients} index={index} />
-      ))}
-
-      <h2 className="!mb-4">Instructions</h2>
-      {instructions.map((instruction, index) => (
-        <InstructionsList key={index} title={instruction.title} instructions={instruction.instructions} index={index} />
-      ))}
+      <div className="flex flex-col md:flex-row gap-4 mt-8">
+        <div className="min-w-fit w-fit bg-primary-foreground p-4 h-fit rounded">
+          <h2 className="mt-0">Ingredients</h2>
+          {ingredients.map((ingredient, index) => (
+            <IngredientsList key={index} title={ingredient.title} ingredients={ingredient.ingredients} index={index} />
+          ))}
+        </div>
+        <div className="max-w-[800px]">
+          <h2 className="mt-0">Instructions</h2>
+          {instructions.map((instruction, index) => (
+            <InstructionsList
+              key={index}
+              title={instruction.title}
+              instructions={instruction.instructions}
+              index={index}
+            />
+          ))}
+        </div>
+      </div>
 
       {body && <p>{body}</p>}
       {images && images.map((image, index) => <Image key={index} src={image} alt="" />)}
