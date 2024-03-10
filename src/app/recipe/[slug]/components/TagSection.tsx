@@ -1,4 +1,5 @@
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 interface TagSectionProps {
   title: string;
@@ -8,10 +9,10 @@ interface TagSectionProps {
 
 const TagSection: React.FC<TagSectionProps> = ({ title, tags, badgeColor = 'bg-slate-400' }) => (
   <div>
-    <span>{title}</span>
+    <strong>{title}</strong>
     <div className="flex text-nowrap">
       {tags?.map((tag, index) => (
-        <Badge key={index} variant="secondary" className={`mr-2 w-fit ${badgeColor}`}>
+        <Badge key={index} variant="outline" className={cn('w-fit', badgeColor)}>
           {tag}
         </Badge>
       ))}

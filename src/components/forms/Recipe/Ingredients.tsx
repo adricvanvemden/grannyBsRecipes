@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import useArrayForm from '@/lib/hooks/useArrayForm';
 import { ArrowDown, ArrowUp, Trash2, Plus } from 'lucide-react';
@@ -25,6 +25,7 @@ const Ingredients: React.FC<IngredientsProps> = ({ form }) => {
               name={`ingredients.${index}.title`}
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Ingredients</FormLabel>
                   <FormControl>
                     <Input placeholder="Ingredient Set Title" {...field} />
                   </FormControl>

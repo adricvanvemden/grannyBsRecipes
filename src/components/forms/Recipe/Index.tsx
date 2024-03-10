@@ -15,11 +15,12 @@ import { create } from '@/app/actions';
 import { toast } from 'sonner';
 import { FancyMultiSelect } from '@/components/FancyMultiSelect';
 import { COOKING_METHOD_TAGS, CUISINE_TAGS, DIETARY_TAGS, MEAL_TYPE_TAGS } from '@/app/Constants';
-
+import { useState } from 'react';
 
 export type RecipeFormValues = z.infer<typeof recipeSchema>;
 
 function RecipeForm() {
+  const [resetKey, setResetKey] = useState<string>('');
   const form = useForm<RecipeFormValues>({
     resolver: zodResolver(recipeSchema),
     defaultValues: {
@@ -47,6 +48,7 @@ function RecipeForm() {
     if (success) {
       toast.success('Recipe has been created');
       form.reset({});
+      setResetKey(Date.now().toString());
     } else {
       toast.error('Error: Recipe could not be created', { description: message });
     }
@@ -83,20 +85,9 @@ function RecipeForm() {
           )}
         />
 
-        {/* Instructions inputs */}
-        <div className="space-y-2">
-          <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Instructions
-          </span>
-          <Instructions form={form} />
-        </div>
+        <Instructions form={form} />
 
-        <div className="space-y-2">
-          <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Ingredients
-          </span>
-          <Ingredients form={form} />
-        </div>
+        <Ingredients form={form} />
 
         <FormField
           control={form.control}
@@ -165,9 +156,10 @@ function RecipeForm() {
           name="cuisineTags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select Cuisine</FormLabel>
+              <FormLabel>Cuisine</FormLabel>
               <FormControl>
                 <FancyMultiSelect
+                  key={resetKey}
                   options={CUISINE_TAGS}
                   placeholder="Search cuisine..."
                   onChange={(values) => {
@@ -185,9 +177,10 @@ function RecipeForm() {
           name="mealTypeTags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select Meal Type</FormLabel>
+              <FormLabel>Meal Type</FormLabel>
               <FormControl>
                 <FancyMultiSelect
+                  key={resetKey}
                   options={MEAL_TYPE_TAGS}
                   placeholder="Search meal type..."
                   onChange={(values) => {
@@ -205,9 +198,10 @@ function RecipeForm() {
           name="dietaryTags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select Dietary Type</FormLabel>
+              <FormLabel>Dietary Type</FormLabel>
               <FormControl>
                 <FancyMultiSelect
+                  key={resetKey}
                   options={DIETARY_TAGS}
                   placeholder="Search dietary type..."
                   onChange={(values) => {
@@ -225,9 +219,10 @@ function RecipeForm() {
           name="cookingMethodTags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select Cooking Method</FormLabel>
+              <FormLabel>Cooking Method</FormLabel>
               <FormControl>
                 <FancyMultiSelect
+                  key={resetKey}
                   options={COOKING_METHOD_TAGS}
                   placeholder="Search cooking method..."
                   onChange={(values) => {

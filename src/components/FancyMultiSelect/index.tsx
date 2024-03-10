@@ -6,6 +6,7 @@ import { X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Command as CommandPrimitive } from 'cmdk';
+import { useEffect } from 'react';
 
 type Options = Record<'value' | 'label', string>;
 
@@ -13,18 +14,24 @@ interface FancyMultiSelectProps {
   options: Options[];
   placeholder?: string;
   onChange?: (values: { value: string; label: string }[]) => void;
+  key: string;
 }
 
-export const FancyMultiSelect: React.FC<FancyMultiSelectProps> = ({ onChange, options, placeholder }) => {
+export const FancyMultiSelect: React.FC<FancyMultiSelectProps> = ({ onChange, options, placeholder, key }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<Options[]>([]);
   const [inputValue, setInputValue] = React.useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     onChange?.(selected);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
+
+  useEffect(() => {
+    // Reset selected values when the key prop changes
+    setSelected([]);
+  }, [key]);
 
   const handleUnselect = React.useCallback((option: Options) => {
     setSelected((prev) => prev.filter((s) => s.value !== option.value));

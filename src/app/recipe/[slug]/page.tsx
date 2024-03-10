@@ -45,28 +45,28 @@ export default async function RecipePage({ params }: { params: { slug: string } 
     <div className="prose max-w-[1200px] container my-12">
       <BackButton />
 
-      <h1 className="mb-0 text-2xl md:text-4xl">{title}</h1>
+      <h1 className="mb-0 text-2xl md:text-4xl text-center">{title}</h1>
       <hr className="my-2" />
       <Author name={author} />
-      <p className="my-4">{shortDescription}</p>
-
-      <div className="flex gap-2 flex-wrap">
-        <TagSection title="Cuisine" tags={cuisineTags} />
-        <TagSection title="Cooking Method" tags={cookingMethodTags} />
-        <TagSection title="Dietary" tags={dietaryTags} />
-        <TagSection title="Type" tags={mealTypeTags} />
+      <div className="flex gap-4">
+        <p className="my-4">{shortDescription}</p>
+        <div className="flex flex-wrap gap-2 bg-primary-foreground w-fit p-4 rounded text-sm">
+          <TagSection title="Cuisine" tags={cuisineTags} />
+          <TagSection title="Cooking Method" tags={cookingMethodTags} />
+          <TagSection title="Dietary" tags={dietaryTags} />
+          <TagSection title="Type" tags={mealTypeTags} />
+        </div>
       </div>
-
       <TimeAndServing preparationTime={preparationTime} cookingTime={cookingTime} portions={portions} />
       <div className="flex flex-col md:flex-row gap-4 mt-8">
-        <div className="min-w-fit w-fit bg-primary-foreground p-4 h-fit rounded">
+        <div className="w-full md:min-w-[350px] md:w-fit md:max-w-[500px] bg-primary-foreground p-4 h-fit rounded">
           <h2 className="mt-0">Ingredients</h2>
           {ingredients.map((ingredient, index) => (
             <IngredientsList key={index} title={ingredient.title} ingredients={ingredient.ingredients} index={index} />
           ))}
         </div>
         <div className="max-w-[800px]">
-          <h2 className="mt-0">Instructions</h2>
+          <h2 className="mt-4">Instructions</h2>
           {instructions.map((instruction, index) => (
             <InstructionsList
               key={index}

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import useArrayForm from '@/lib/hooks/useArrayForm';
 import { ArrowDown, ArrowUp, Minus, Plus, Trash2 } from 'lucide-react';
@@ -25,6 +25,7 @@ const Instructions: React.FC<InstructionsProps> = ({ form }) => {
               name={`instructions.${index}.title`}
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Instructions</FormLabel>
                   <FormControl>
                     <Input placeholder="Instruction Set Title" {...field} />
                   </FormControl>
