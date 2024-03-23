@@ -42,7 +42,7 @@ export default async function RecipePage({ params }: { params: { slug: string } 
   } = recipe;
 
   return (
-    <div className="prose max-w-[1200px] container my-12">
+    <div className="prose max-w-[1200px] container my-6">
       <BackButton />
 
       <h1 className="mb-0 text-2xl md:text-4xl text-center">{title}</h1>
