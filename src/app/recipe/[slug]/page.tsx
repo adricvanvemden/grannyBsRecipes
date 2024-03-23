@@ -59,7 +59,7 @@ export default async function RecipePage({ params }: { params: { slug: string } 
       </div>
       <TimeAndServing preparationTime={preparationTime} cookingTime={cookingTime} portions={portions} />
       <div className="flex flex-col md:flex-row gap-4 mt-8">
-        <div className="w-full md:min-w-[350px] md:w-fit md:max-w-[500px] bg-primary-foreground p-4 h-fit rounded">
+        <div className="md:sticky md:top-8 w-full md:min-w-[350px] md:w-fit md:max-w-[500px] bg-primary-foreground p-4 h-fit rounded">
           <h2 className="mt-0">Ingredients</h2>
           {ingredients.map((ingredient, index) => (
             <IngredientsList key={index} title={ingredient.title} ingredients={ingredient.ingredients} index={index} />
