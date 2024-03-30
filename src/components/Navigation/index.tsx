@@ -1,6 +1,8 @@
 import MobileMenu from './MobileMenu';
 import Logo from './Logo';
 import { NavigationItems } from './NavigationItems';
+import { createClient } from '@/lib/utils/supabase/server';
+import { signOut } from '@/app/login/actions';
 
 export type Link = {
   url: string;
@@ -44,7 +46,11 @@ const linksRight: Link[] = [
   },
 ];
 
-const Navigation = () => {
+const Navigation = async () => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+
   return (
     <div className="h-16 bg-primary flex">
       <nav className="gap-4 container flex items-center">
@@ -53,7 +59,7 @@ const Navigation = () => {
           <NavigationItems links={linksLeft} classNames="hidden lg:flex" />
           <NavigationItems links={linksRight} classNames="hidden lg:flex" />
         </div>
-        <MobileMenu links={[...linksLeft, ...linksRight]} />
+        <MobileMenu links={[...linksLeft, ...linksRight]} isLoggedIn={!!data?.user} />
       </nav>
     </div>
   );

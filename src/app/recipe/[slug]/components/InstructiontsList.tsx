@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utils';
 import { useState } from 'react';
 
 const InstructionsList: React.FC<InstructionSet & { index: number }> = ({ instructions, title, index }) => {

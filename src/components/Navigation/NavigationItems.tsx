@@ -11,7 +11,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utils';
 import { Link } from './index';
 
 export const NavigationItems: React.FC<{

@@ -1,5 +1,5 @@
 import { Checkbox } from '@/components/ui/checkbox';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utils';
 
 const IngredientsList: React.FC<IngredientSet & { index: number }> = ({ title, ingredients, index }) => (
   <div className={cn(index > 0 ? 'my-8' : 'mb-8')}>
