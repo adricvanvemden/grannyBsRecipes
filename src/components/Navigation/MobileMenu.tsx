@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils/utils';
 import { Link } from './index';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import { signOut } from '@/app/login/actions';
+import SignOutButton from './signOutButton';
 
 const MobileMenu: React.FC<{ links: Link[]; isLoggedIn?: boolean }> = ({ links, isLoggedIn }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,14 +23,6 @@ const MobileMenu: React.FC<{ links: Link[]; isLoggedIn?: boolean }> = ({ links, 
     });
   }
 
-  const handleSignOut = async () => {
-    const result = await signOut();
-
-    if (!result?.error) {
-      handleOnClick();
-    }
-  };
-
   useEffect(() => {
     return () => {
       document.body.style.overflow = 'auto';
@@ -45,7 +37,7 @@ const MobileMenu: React.FC<{ links: Link[]; isLoggedIn?: boolean }> = ({ links, 
 
   return (
     <>
-      <button className="flex w-24 items-center justify-center lg:hidden" onClick={handleOnClick}>
+      <button className="absolute right-0 flex w-24 items-center justify-center lg:hidden" onClick={handleOnClick}>
         {isOpen ? (
           <X className="h-6 w-6 text-primary-foreground" />
         ) : (
@@ -61,11 +53,7 @@ const MobileMenu: React.FC<{ links: Link[]; isLoggedIn?: boolean }> = ({ links, 
       >
         <button className="mr-2 mt-3 self-end" onClick={handleOnClick}></button>
         <NavigationItems links={links} classNames="h-fit" orientation="vertical" />
-        {isLoggedIn && (
-          <button onClick={handleSignOut} className="text-primary-foreground w-max">
-            Sign out
-          </button>
-        )}
+        {isLoggedIn && <SignOutButton onClick={handleOnClick} />}
       </div>
     </>
   );
