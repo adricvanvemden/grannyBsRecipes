@@ -45,7 +45,10 @@ const Card: React.FC<CardProps> = ({ image, title, shortDescription, href }) => 
   return (
     <Link
       href={href}
-      className={cn('group hover:scale-105 duration-300 ease-in-out transition-transform relative', kalam.className)}
+      className={cn(
+        'group focus:scale-105 hover:scale-105 duration-300 ease-in-out transition-transform relative',
+        kalam.className
+      )}
     >
       <div className={cn('absolute right-0 size-4 bg-background', top ? 'top-0' : 'bottom-0')} />
       <div
