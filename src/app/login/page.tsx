@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-import { set, z } from 'zod';
-import Link from 'next/link';
+import { z } from 'zod';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { login } from '../login/actions'; // Make sure this function exists
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { CookingPot } from 'lucide-react';
 
 const LoginSchema = z.object({
@@ -19,8 +19,10 @@ const LoginSchema = z.object({
 type LoginFormValues = z.infer<typeof LoginSchema>;
 
 function LoginForm() {
+  const captcha = useRef<null | HCaptcha>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(LoginSchema),
   });
@@ -33,16 +35,17 @@ function LoginForm() {
       return;
     }
 
-    console.log({ success: true, data: result.data });
-
     const formData = new FormData();
     formData.append('email', result.data.email);
     formData.append('password', result.data.password);
+    formData.append('captchaToken', captchaToken || '');
 
     setLoading(true);
     login(formData).then((result) => {
       setLoading(false);
       setError(result?.error);
+      captcha.current?.resetCaptcha();
+      setCaptchaToken(null);
     });
   };
 
@@ -82,6 +85,13 @@ function LoginForm() {
           <Button type="submit">
             {loading ? <CookingPot size="20" className="animate-bounce duration-350 mt-0.5" /> : 'Log in'}
           </Button>
+          <HCaptcha
+            ref={captcha}
+            sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || ''}
+            onVerify={(token) => {
+              setCaptchaToken(token);
+            }}
+          />
         </fieldset>
       </form>
     </Form>
