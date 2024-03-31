@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Command as CommandPrimitive } from 'cmdk';
 import { useEffect } from 'react';
+import { cn } from '@/lib/utils/utils';
 
 type Options = Record<'value' | 'label', string>;
 
@@ -15,9 +16,16 @@ interface FancyMultiSelectProps {
   placeholder?: string;
   onChange?: (values: { value: string; label: string }[]) => void;
   key: string;
+  className?: string;
 }
 
-export const FancyMultiSelect: React.FC<FancyMultiSelectProps> = ({ onChange, options, placeholder, key }) => {
+export const FancyMultiSelect: React.FC<FancyMultiSelectProps> = ({
+  onChange,
+  options,
+  placeholder,
+  key,
+  className,
+}) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<Options[]>([]);
@@ -60,11 +68,16 @@ export const FancyMultiSelect: React.FC<FancyMultiSelectProps> = ({ onChange, op
 
   return (
     <Command onKeyDown={handleKeyDown} className="overflow-visible bg-transparent">
-      <div className="group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+      <div
+        className={cn(
+          'bg-background group border border-input px-3 py-2 text-sm ring-offset-background rounded-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+          className
+        )}
+      >
         <div className="flex gap-1 flex-wrap">
           {selected.map((option) => {
             return (
-              <Badge key={option.value} variant="secondary">
+              <Badge key={option.value} variant="accent">
                 {option.label}
                 <button
                   className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"

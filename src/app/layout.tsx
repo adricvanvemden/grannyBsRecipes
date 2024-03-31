@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import Navigation from '@/components/Navigation';
-
-const inter = Inter({ subsets: ["latin"] });
+import { inter } from './fonts';
+import { cn } from '@/lib/utils/utils';
 
 export const metadata: Metadata = {
   title: "GrannyB's Recipes",
@@ -18,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn('', inter.className)}>
         <Navigation />
         <main> {children} </main>
         <Toaster />

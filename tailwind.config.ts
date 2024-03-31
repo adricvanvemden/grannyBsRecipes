@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from 'tailwindcss';
 
 const config = {
   darkMode: ['class'],
@@ -24,27 +24,30 @@ const config = {
         border: 'var(--border)',
         input: 'var(--input)',
         ring: 'var(--ring)',
-        background: 'var(--background)',
+        background: '#F8F7F3',
         foreground: 'var(--foreground)',
+        'primary-text': 'var(--primary-text)',
+        'secondary-text': 'var(--secondary-text)',
+        neutral: '#6d796dff',
         primary: {
-          DEFAULT: 'var(--primary)',
+          DEFAULT: '#6495edff',
           foreground: 'var(--primary-foreground)',
         },
-        secondary: {
-          DEFAULT: 'var(--secondary))',
-          foreground: 'var(--secondary-foreground)',
+        accent: {
+          DEFAULT: '#e1c4ffff',
+          foreground: 'var(--accent-foreground)',
         },
         destructive: {
-          DEFAULT: 'var(--destructive)',
+          DEFAULT: '#FF0000',
           foreground: 'var(--destructive-foreground)',
         },
         muted: {
           DEFAULT: 'var(--muted)',
           foreground: 'var(--muted-foreground)',
         },
-        accent: {
-          DEFAULT: 'var(--accent)',
-          foreground: 'var(--accent-foreground)',
+        secondary: {
+          DEFAULT: '#965456ff',
+          foreground: 'var(--secondary-foreground)',
         },
         popover: {
           DEFAULT: 'var(--popover)',
@@ -79,4 +82,4 @@ const config = {
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 } satisfies Config;
 
-export default config
+export default config;

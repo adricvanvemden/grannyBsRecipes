@@ -47,7 +47,7 @@ const MobileMenu: React.FC<{ links: Link[]; isLoggedIn?: boolean }> = ({ links, 
 
       <div
         className={cn(
-          'absolute inset-0 top-16 z-10 flex h-screen flex-col gap-4 bg-primary px-5 transition-opacity duration-200 lg:hidden',
+          'absolute inset-0 top-16 z-50 flex h-screen flex-col gap-4 bg-secondary px-5 transition-opacity duration-200 lg:hidden',
           isOpen ? 'opacity-100' : 'opacity-0 -z-50'
         )}
       >

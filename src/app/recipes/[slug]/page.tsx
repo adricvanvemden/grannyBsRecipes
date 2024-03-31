@@ -9,6 +9,8 @@ import IngredientsList from './components/IngredientsList';
 import TagSection from './components/TagSection';
 import InstructionsList from './components/InstructiontsList';
 import Author from './components/Author';
+import { cn } from '@/lib/utils/utils';
+import { kalam } from '@/app/fonts';
 
 export async function generateStaticParams() {
   const slugs = await getRecipeSlugs();
@@ -42,31 +44,31 @@ export default async function RecipePage({ params }: { params: { slug: string } 
   } = recipe;
 
   return (
-    <div className="prose max-w-[1200px] container my-6">
+    <div className={cn('prose max-w-[1200px] container my-6', kalam.className)}>
       <BackButton />
 
       <h1 className="mb-0 text-2xl md:text-4xl text-center">{title}</h1>
-      <hr className="my-2" />
       <Author name={author} />
-      <div className="flex gap-4">
-        <p className="my-4">{shortDescription}</p>
-        <div className="flex flex-wrap gap-2 bg-primary-foreground w-fit p-4 rounded text-sm">
-          <TagSection title="Cuisine" tags={cuisineTags} />
-          <TagSection title="Cooking Method" tags={cookingMethodTags} />
-          <TagSection title="Dietary" tags={dietaryTags} />
-          <TagSection title="Type" tags={mealTypeTags} />
-        </div>
+      <hr className="-mt-[5px] mb-2 border-neutral/30" />
+      <p className="text-center my-4">{shortDescription}</p>
+      <div className="mx-auto flex flex-wrap gap-2 border-neutral border-2 w-fit p-4 rounded text-sm">
+        <TagSection title="Cuisine" tags={cuisineTags} />
+        <TagSection title="Cooking Method" tags={cookingMethodTags} />
+        <TagSection title="Dietary" tags={dietaryTags} />
+        <TagSection title="Type" tags={mealTypeTags} />
       </div>
-      <TimeAndServing preparationTime={preparationTime} cookingTime={cookingTime} portions={portions} />
+      {body && <p>{body}</p>}
+      {images && images.map((image, index) => <Image key={index} src={image} alt="" />)}
       <div className="flex flex-col md:flex-row gap-4 mt-8">
-        <div className="md:sticky md:top-8 w-full md:min-w-[350px] md:w-fit md:max-w-[500px] bg-primary-foreground p-4 h-fit rounded">
-          <h2 className="mt-0">Ingredients</h2>
+        <div className="md:sticky md:top-8 w-fit mx-auto md:min-w-[350px] md:w-fit md:max-w-[500px] bg-primary/20 p-4 pb-1 h-fit rounded">
+          <TimeAndServing preparationTime={preparationTime} cookingTime={cookingTime} portions={portions} />
+          <h2 className="my-0 mb-2">Ingredients</h2>
           {ingredients.map((ingredient, index) => (
             <IngredientsList key={index} title={ingredient.title} ingredients={ingredient.ingredients} index={index} />
           ))}
         </div>
-        <div className="max-w-[800px]">
-          <h2 className="mt-4">Instructions</h2>
+        <div className="max-w-[800px] bg-secondary/30 px-4 rounded">
+          <h2 className="mt-4 mb-2">Instructions</h2>
           {instructions.map((instruction, index) => (
             <InstructionsList
               key={index}
@@ -77,9 +79,6 @@ export default async function RecipePage({ params }: { params: { slug: string } 
           ))}
         </div>
       </div>
-
-      {body && <p>{body}</p>}
-      {images && images.map((image, index) => <Image key={index} src={image} alt="" />)}
     </div>
   );
 }

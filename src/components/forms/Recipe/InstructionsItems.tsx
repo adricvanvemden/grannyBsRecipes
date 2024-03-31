@@ -5,6 +5,7 @@ import useArrayForm from '@/lib/hooks/useArrayForm';
 import { ArrowDown, ArrowUp, Minus, Plus, Trash2 } from 'lucide-react';
 import { RecipeFormValues } from './Index';
 import { UseFormReturn } from 'react-hook-form';
+import { kalam } from '@/app/fonts';
 
 interface InstructionsItemsProps {
   form: UseFormReturn<RecipeFormValues>;
@@ -18,58 +19,53 @@ const InstructionsItems: React.FC<InstructionsItemsProps> = ({ form, index }) =>
   );
 
   return (
-    <div className="flex flex-col gap-4 bg-gray-300 p-4">
+    <div className="flex flex-col gap-4 bg-secondary/30 rounded p-4 pb-1">
       {fields.map((item, _index) => (
-        <div key={item.id} className="grid grid-cols-[1fr_68px] gap-4">
+        <div key={item.id} className="grid grid-cols-[30px_1fr_120px] gap-4">
+          <span className="mt-2 h-fit text-center bg-secondary text-primary-foreground rounded">{_index + 1}</span>
           <FormField
             control={form.control}
             name={`instructions.${index}.instructions.${_index}.instruction`}
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Instruction" {...field} />
+                  <Input placeholder="Instruction" {...field} className={kalam.className} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="grid grid-cols-3">
-            {_index > 0 && (
-              <Button
-                asChild
-                size="icon-md"
-                variant="link"
-                className="mt-2.5 cursor-pointer"
-                onClick={() => moveItemUp(_index)}
-              >
-                <ArrowUp size={12} />
-              </Button>
-            )}
+          <div className="grid grid-cols-3 mt-1">
+            <Button
+              disabled={_index === 0}
+              size="icon-md"
+              variant="outline"
+              className="p-4 cursor-pointer"
+              onClick={() => moveItemUp(_index)}
+            >
+              <ArrowUp size={20} className="shrink-0" />
+            </Button>
 
-            {_index < fields.length - 1 && (
-              <Button
-                asChild
-                size="icon-md"
-                variant="link"
-                className="mt-2.5 cursor-pointer"
-                onClick={() => moveItemDown(_index)}
-              >
-                <ArrowDown size={12} />
-              </Button>
-            )}
+            <Button
+              disabled={_index === fields.length - 1}
+              size="icon-md"
+              variant="outline"
+              className="p-4 cursor-pointer"
+              onClick={() => moveItemDown(_index)}
+            >
+              <ArrowDown size={20} className="shrink-0" />
+            </Button>
 
-            {_index > 0 && (
-              <Button
-                asChild
-                size="icon-md"
-                variant="link"
-                className="mt-2.5 cursor-pointer col-start-3"
-                onClick={() => deleteItem(_index)}
-              >
-                <Trash2 size={12} />
-              </Button>
-            )}
+            <Button
+              disabled={_index === 0}
+              size="icon-md"
+              variant="outline"
+              className="p-4 cursor-pointer col-start-3"
+              onClick={() => deleteItem(_index)}
+            >
+              <Trash2 size={20} className="shrink-0" />
+            </Button>
           </div>
         </div>
       ))}
@@ -77,7 +73,7 @@ const InstructionsItems: React.FC<InstructionsItemsProps> = ({ form, index }) =>
         asChild
         size="sm"
         variant="link"
-        className="cursor-pointer text-xs !pl-0 w-max -mt-4"
+        className="text-white cursor-pointer text-xs !pl-0 w-max -mt-3"
         onClick={() => addItem({ instruction: '' })}
       >
         <div className="flex">

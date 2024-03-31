@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/lib/utils/utils';
+import { cn } from '@/lib//utils/utils';
 import { useState } from 'react';
 
 const InstructionsList: React.FC<InstructionSet & { index: number }> = ({ instructions, title, index }) => {
@@ -13,13 +13,13 @@ const InstructionsList: React.FC<InstructionSet & { index: number }> = ({ instru
   }
 
   return (
-    <div className={cn(index > 0 ? 'my-8' : 'mb-8')}>
-      <strong>{title}</strong>
+    <div className="bg-secondary/60 px-2 pt-2 pb-px rounded mb-4">
+      <h3 className="my-0">{title}</h3>
       <ol className="not-prose">
         {instructions.map((instruction, index) => (
           <li
             className={cn(
-              'flex my-4 gap-2 cursor-pointer',
+              'flex my-4 gap-2 cursor-pointer border-neutral border-b last:border-b-0 pb-2 last:pb-0',
               completedInstructions.includes(index) ? 'text-black/25' : 'text-black'
             )}
             key={index}
@@ -27,13 +27,15 @@ const InstructionsList: React.FC<InstructionSet & { index: number }> = ({ instru
           >
             <div
               className={cn(
-                'rounded-full max-h-6 max-w-6 w-full text-center text-white text-sm pt-0.5',
-                completedInstructions.includes(index) ? 'bg-orange-500/25' : 'bg-orange-500'
+                'rounded max-h-6 max-w-6 w-full text-center text-white text-sm pt-px border-2 border-accent',
+                completedInstructions.includes(index)
+                  ? 'bg-secondary/25 border-secondary/25'
+                  : 'bg-secondary border-accent'
               )}
             >
               {index + 1}
             </div>
-            <span className="-mt-px">{instruction.instruction}</span>
+            <span className="-mt-px ">{instruction.instruction}</span>
           </li>
         ))}
       </ol>

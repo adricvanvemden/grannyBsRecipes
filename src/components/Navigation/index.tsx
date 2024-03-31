@@ -21,7 +21,7 @@ export type Link = {
 
 const linksLeft: Link[] = [
   {
-    url: '/recipe',
+    url: '/recipes',
     title: 'Recipes',
     external: false,
     target: '_self',
@@ -47,7 +47,7 @@ const Navigation = async () => {
   if (isLoggedIn) {
     linksRight = [
       {
-        url: '/recipe/create',
+        url: '/recipes/create',
         title: 'New Recipe',
         external: false,
         target: '_self',
@@ -64,7 +64,7 @@ const Navigation = async () => {
   }
 
   return (
-    <div className="h-16 bg-primary flex">
+    <div className="h-16 bg-secondary flex shadow">
       <nav className="gap-4 container flex items-center">
         <Logo />
         <div className="hidden lg:flex w-full  justify-between">

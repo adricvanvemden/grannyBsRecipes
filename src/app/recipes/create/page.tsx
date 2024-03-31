@@ -11,5 +11,12 @@ export default async function CreateRecipe() {
     redirect('/login');
   }
 
-  return <RecipeForm />;
+  return (
+    <div className="container my-6">
+      <h2 className="font-bold text-2xl mb-4">Write A New Recipe</h2>
+      <div className="backdrop-filter backdrop-blur-md bg-secondary/20 p-4">
+        <RecipeForm />
+      </div>
+    </div>
+  );
 }

@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import { FancyMultiSelect } from '@/components/FancyMultiSelect';
 import { COOKING_METHOD_TAGS, CUISINE_TAGS, DIETARY_TAGS, MEAL_TYPE_TAGS } from '@/app/Constants';
 import { useState } from 'react';
+import { kalam } from '@/app/fonts';
 
 export type RecipeFormValues = z.infer<typeof recipeSchema>;
 
@@ -56,7 +57,7 @@ function RecipeForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 container my-8 py-4 border rounded">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 text-black">
         <FormField
           control={form.control}
           name="title"
@@ -64,7 +65,7 @@ function RecipeForm() {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Title" {...field} />
+                <Input placeholder="Title" {...field} className={kalam.className} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -78,7 +79,7 @@ function RecipeForm() {
             <FormItem>
               <FormLabel>Short description</FormLabel>
               <FormControl>
-                <Textarea placeholder="Short description" {...field} />
+                <Textarea placeholder="Short description" {...field} className={kalam.className} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -102,9 +103,10 @@ function RecipeForm() {
                   min={0}
                   {...field}
                   onChange={(e) => field.onChange(parseInt(e.target.value))}
+                  className={kalam.className}
                 />
               </FormControl>
-              <FormDescription>in minutes</FormDescription>
+              <FormDescription className="text-secondary">in minutes</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -123,9 +125,10 @@ function RecipeForm() {
                   min={0}
                   {...field}
                   onChange={(e) => field.onChange(parseInt(e.target.value))}
+                  className={kalam.className}
                 />
               </FormControl>
-              <FormDescription>in minutes</FormDescription>
+              <FormDescription className="text-secondary">in minutes</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -144,6 +147,7 @@ function RecipeForm() {
                   min={0}
                   {...field}
                   onChange={(e) => field.onChange(parseInt(e.target.value))}
+                  className={kalam.className}
                 />
               </FormControl>
               <FormMessage />
@@ -165,6 +169,7 @@ function RecipeForm() {
                   onChange={(values) => {
                     field.onChange(values.map(({ value }) => value));
                   }}
+                  className={kalam.className}
                 />
               </FormControl>
               <FormMessage />
@@ -186,6 +191,7 @@ function RecipeForm() {
                   onChange={(values) => {
                     field.onChange(values.map(({ value }) => value));
                   }}
+                  className={kalam.className}
                 />
               </FormControl>
               <FormMessage />
@@ -207,6 +213,7 @@ function RecipeForm() {
                   onChange={(values) => {
                     field.onChange(values.map(({ value }) => value));
                   }}
+                  className={kalam.className}
                 />
               </FormControl>
               <FormMessage />
@@ -228,6 +235,7 @@ function RecipeForm() {
                   onChange={(values) => {
                     field.onChange(values.map(({ value }) => value));
                   }}
+                  className={kalam.className}
                 />
               </FormControl>
               <FormMessage />
@@ -241,10 +249,10 @@ function RecipeForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Body <span className="text-gray-400 text-xs">(optional)</span>
+                Body <span className="text-secondary text-xs">(optional)</span>
               </FormLabel>
               <FormControl>
-                <Textarea placeholder="Body" {...field} />
+                <Textarea placeholder="Body" {...field} className={kalam.className} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -257,7 +265,7 @@ function RecipeForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Images <span className="text-gray-400 text-xs">(optional)</span>
+                Images <span className="text-secondary text-xs">(optional)</span>
               </FormLabel>
               <FormControl>
                 <Input id="picture" type="file" multiple accept="image/png, image/jpeg, image/webp" {...field} />
@@ -267,7 +275,9 @@ function RecipeForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full">
+          SAVE RECIPE
+        </Button>
       </form>
     </Form>
   );

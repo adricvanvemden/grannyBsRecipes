@@ -1,6 +1,6 @@
 'use client';
 import { signOut } from '@/app/login/actions';
-import { CookingPot } from 'lucide-react';
+import { ChefHat } from 'lucide-react';
 import { useState } from 'react';
 
 const SignOutButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
@@ -20,7 +20,7 @@ const SignOutButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
 
   return (
     <button onClick={handleSignOut} className="lg:px-4 text-primary-foreground w-max">
-      {loading ? <CookingPot size="20" className="animate-bounce duration-350 mt-0.5" /> : 'Sign out'}
+      {loading ? <ChefHat size="20" className="animate-bounce duration-350 mt-0.5" /> : 'Sign out'}
     </button>
   );
 };

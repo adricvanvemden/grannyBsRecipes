@@ -7,12 +7,12 @@ interface TagSectionProps {
   badgeColor?: string;
 }
 
-const TagSection: React.FC<TagSectionProps> = ({ title, tags, badgeColor = 'bg-slate-400' }) => (
+const TagSection: React.FC<TagSectionProps> = ({ title, tags, badgeColor = 'bg-accent' }) => (
   <div>
     <strong>{title}</strong>
     <div className="flex text-nowrap">
       {tags?.map((tag, index) => (
-        <Badge key={index} variant="outline" className={cn('w-fit', badgeColor)}>
+        <Badge key={index} variant="default" className={cn('w-fit text-white', badgeColor)}>
           {tag}
         </Badge>
       ))}
