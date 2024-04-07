@@ -44,18 +44,13 @@ interface Tag {
   type: string;
 }
 
-interface Calorie {
-  id: number;
-  value: number;
-  recipe_id: number;
-}
-
-interface Macronutrient {
+interface Nutrient {
   id: number;
   fat: number;
   protein: number;
   recipe_id: number;
   carbohydrates: number;
+  calories: number;
 }
 
 export interface RecipeData {
@@ -72,6 +67,5 @@ export interface RecipeData {
   ingredients_lists: IngredientList[];
   instructions_lists: InstructionList[];
   tags: Tag[];
-  calories: Calorie[];
-  macronutrients: Macronutrient[];
+  nutrients: Nutrient[];
 }

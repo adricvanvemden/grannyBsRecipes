@@ -56,8 +56,7 @@ export async function getRecipe(slug: string) {
     ingredients_lists(*, ingredients(*)),
     instructions_lists(*, instructions(*)),
     tags(*),
-    calories(*),
-    macronutrients(*)
+    nutrients(*)
   `
     )
     .match({ slug })

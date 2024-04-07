@@ -142,14 +142,9 @@ const Dummy = () => {
 
     await supabase.from('recipe_tags').insert(recipeTags);
 
-    // Inserting macronutrients
-    await supabase.from('macronutrients').insert([
+    // Inserting nutrients
+    await supabase.from('nutrients').insert([
       { recipe_id: recipeId, protein: 25, carbohydrates: 30, fat: 10 }, // Example values
-    ]);
-
-    // Inserting calories
-    await supabase.from('calories').insert([
-      { recipe_id: recipeId, value: 350 }, // Example calorie value
     ]);
   };
   return (
