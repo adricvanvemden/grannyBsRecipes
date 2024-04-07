@@ -4,6 +4,8 @@ import fs from 'fs';
 import path from 'path';
 import slugify from 'slugify';
 import { z } from 'zod';
+import { createClient as createServerClient } from '@/lib/utils/supabase/server';
+import { createClient } from '@/lib/utils/supabase/client';
 
 export async function create(data: z.infer<typeof recipeSchema> & { slug?: string }) {
   // TODO: REPLACE WITH DATABASE FUNCTION
@@ -37,35 +39,40 @@ export async function create(data: z.infer<typeof recipeSchema> & { slug?: strin
 }
 
 export async function getRecipes() {
-  const recipeDirectory = path.join(process.cwd(), 'recipes');
-  const filenames = fs.readdirSync(recipeDirectory);
+  const supabase = createServerClient();
+  const result = await supabase.from('recipes').select('title, short_description, slug');
 
-  const recipes = filenames.map((filename) => {
-    const filePath = path.join(recipeDirectory, filename);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-
-    return JSON.parse(fileContents);
-  });
-
-  return recipes;
+  return result;
 }
 
 export async function getRecipe(slug: string) {
-  if (!fileExists(slug)) {
-    return null;
-  }
+  const supabase = createServerClient();
+  const result = await supabase
+    .from('recipes')
+    .select(
+      `
+    *,
+    author: profiles(username),
+    ingredients_lists(*, ingredients(*)),
+    instructions_lists(*, instructions(*)),
+    tags(*),
+    calories(*),
+    macronutrients(*)
+  `
+    )
+    .match({ slug })
+    .single();
 
-  const filePath = path.join(process.cwd(), 'recipes', `${slug}.json`);
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-
-  return JSON.parse(fileContents);
+  return result;
 }
 
 export async function getRecipeSlugs() {
-  const recipeDirectory = path.join(process.cwd(), 'recipes');
-  const filenames = fs.readdirSync(recipeDirectory);
-
-  return filenames.map((filename) => filename.replace('.json', ''));
+  const supabase = createClient();
+  const { data: slugs } = await supabase.from('recipes').select('slug');
+  if (!slugs) {
+    throw new Error('No slugs found');
+  }
+  return slugs?.map((slug) => slug);
 }
 
 // helpers

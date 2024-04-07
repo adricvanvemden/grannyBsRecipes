@@ -6,7 +6,7 @@ import Link from 'next/link';
 interface CardProps {
   image?: string;
   title: string;
-  shortDescription?: string;
+  short_description?: string;
   href: string;
 }
 
@@ -34,7 +34,7 @@ const borderTopColors = [
   'border-t-[#e1c4ffff]',
 ];
 
-const Card: React.FC<CardProps> = ({ image, title, shortDescription, href }) => {
+const Card: React.FC<CardProps> = ({ image, title, short_description, href }) => {
   const random = Math.random();
   const randomColor = backgroundColors[Math.floor(random * backgroundColors.length)];
   const randomBorderTopColor = borderTopColors[Math.floor(random * borderTopColors.length)];
@@ -71,7 +71,7 @@ const Card: React.FC<CardProps> = ({ image, title, shortDescription, href }) => 
           <h2 className="tracking-wide text-lg font-bold text-primary-text border-b border-neutral/30 px-4 pt-2 pb-1">
             {title}
           </h2>
-          {shortDescription && <p className="mt-2 text-black px-4 pb-2">{shortDescription}</p>}
+          {short_description && <p className="mt-2 text-black px-4 pb-2">{short_description}</p>}
         </span>
       </div>
     </Link>

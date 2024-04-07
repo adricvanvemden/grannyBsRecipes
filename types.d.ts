@@ -1,36 +1,73 @@
-type Instruction = {
-  instruction: string;
-};
+// Definition: This file contains all the types that are used in the application.
+// The types are used to define the structure of the data that is being used in the application.
+// This means that it does not match the actual database schema
 
-type InstructionSet = {
-  title: string;
-  instructions: Instruction[];
-};
+interface Author {
+  username: string;
+}
 
-type Ingredient = {
+interface IngredientList {
+  id: number;
+  name: string;
+  recipe_id: number;
+  ingredients: Ingredient[];
+}
+
+interface Ingredient {
+  id: number;
+  list_id: number;
   name: string;
   quantity: number;
   metric: string;
-};
+}
 
-type IngredientSet = {
-  title: string;
-  ingredients: Ingredient[];
-};
+interface InstructionList {
+  id: number;
+  name: string;
+  recipe_id: number;
+  instructions: instruction[];
+}
 
-type Recipe = {
+interface instruction {
+  id: number;
+  list_id: number;
+  instruction: string;
+}
+
+interface Tag {
+  id: number;
+  name: string;
+  type: string;
+}
+
+interface Calorie {
+  id: number;
+  value: number;
+  recipe_id: number;
+}
+
+interface Macronutrient {
+  id: number;
+  fat: number;
+  protein: number;
+  recipe_id: number;
+  carbohydrates: number;
+}
+
+export interface RecipeData {
+  id: number;
   title: string;
-  shortDescription: string;
-  instructions: InstructionSet[];
-  ingredients: IngredientSet[];
-  cookingTime: number;
-  preparationTime: number;
+  short_description: string;
+  cooking_time: string;
+  preparation_time: string;
   portions: number;
   body: string;
-  images: string[]; // Assuming image URLs are strings
-  cuisineTags: string[];
-  mealTypeTags: string[];
-  dietaryTags: string[];
-  cookingMethodTags: string[];
   slug: string;
-};
+  author_id: string;
+  author: Author;
+  ingredients_lists: IngredientList[];
+  instructions_lists: InstructionList[];
+  tags: Tag[];
+  calories: Calorie[];
+  macronutrients: Macronutrient[];
+}

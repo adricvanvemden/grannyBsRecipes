@@ -1,7 +1,7 @@
 interface TimeAndServingProps {
-  preparationTime: number;
-  cookingTime: number;
-  portions: number;
+  preparationTime: string | undefined; // Represented as HH:MM:SS
+  cookingTime: string | undefined;
+  portions: number | undefined;
 }
 
 const TimeAndServing: React.FC<TimeAndServingProps> = ({ preparationTime, cookingTime, portions }) => (

@@ -1,6 +1,7 @@
 import RecipeForm from '@/components/forms/Recipe/Index';
 import { createClient } from '@/lib/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import Dummy from './dummy';
 
 export default async function CreateRecipe() {
   const supabase = createClient();
@@ -13,6 +14,7 @@ export default async function CreateRecipe() {
 
   return (
     <div className="container my-6">
+      <Dummy />
       <h2 className="font-bold text-2xl mb-4">Write A New Recipe</h2>
       <div className="backdrop-filter backdrop-blur-md bg-secondary/20 p-4">
         <RecipeForm />
