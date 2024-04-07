@@ -4,17 +4,19 @@
 - Recipes by filters
 
 # Auth
-- Implement auth with supabase?
-- Connect recipe uploads to supabase?
+- Implement auth with supabase? -> DONE
+- Connect recipe uploads to supabase? -> UPDATE RECIPE CREATE FORM WITH NEW SCHEMA
 
 # Account
 - Color change
 - Detail changes
 
 # Recipe overview
-- Better cards
+- Better cards -> DONE
 - Pagination
 
 # New Recipe
-- Clean up
-- Optional calories?
+- UPDATE TO NEW SCHEMA
+
+# Supabase
+- RLS
