@@ -11,6 +11,7 @@ interface IngredientList {
   name: string;
   recipe_id: number;
   ingredients: Ingredient[];
+  order: number;
 }
 
 interface Ingredient {
@@ -19,6 +20,7 @@ interface Ingredient {
   name: string;
   quantity: number;
   metric: string;
+  order: number;
 }
 
 interface InstructionList {
@@ -26,12 +28,14 @@ interface InstructionList {
   name: string;
   recipe_id: number;
   instructions: instruction[];
+  order: number;
 }
 
 interface instruction {
   id: number;
   list_id: number;
   instruction: string;
+  order: number;
 }
 
 interface Tag {

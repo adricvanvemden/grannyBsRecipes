@@ -1,8 +1,9 @@
 'use client';
 import { cn } from '@/lib//utils/utils';
 import { useState } from 'react';
+import { InstructionList } from '@/types';
 
-const InstructionsList: React.FC<InstructionSet & { index: number }> = ({ instructions, title, index }) => {
+const InstructionsList: React.FC<InstructionList> = ({ instructions, name, order }) => {
   const [completedInstructions, setCompletedInstructions] = useState<number[]>([]);
 
   function toggleCompleted(index: number) {
@@ -14,7 +15,7 @@ const InstructionsList: React.FC<InstructionSet & { index: number }> = ({ instru
 
   return (
     <div className="bg-secondary/60 px-2 pt-2 pb-px rounded mb-4">
-      <h3 className="my-0">{title}</h3>
+      <h3 className="my-0">{`${order}. ${name}`}</h3>
       <ol className="not-prose">
         {instructions.map((instruction, index) => (
           <li

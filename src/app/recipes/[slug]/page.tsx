@@ -12,7 +12,7 @@ import Author from './components/Author';
 import { cn } from '@/lib/utils/utils';
 import { kalam } from '@/app/fonts';
 import { createClient as createServerClient } from '@/lib/utils/supabase/server';
-import { RecipeData } from '../../../../types';
+import { RecipeData } from '@/types';
 
 export async function generateStaticParams() {
   return await getRecipeSlugs();
@@ -63,19 +63,14 @@ export default async function RecipePage({ params }: { params: { slug: string } 
         <div className="md:sticky md:top-8 w-fit mx-auto md:min-w-[350px] md:w-fit md:max-w-[500px] bg-primary/20 p-4 pb-1 h-fit rounded">
           <TimeAndServing preparationTime={preparation_time} cookingTime={cooking_time} portions={portions} />
           <h2 className="my-0 mb-2">Ingredients</h2>
-          {ingredients_lists?.map((ingredient, index) => (
-            <IngredientsList key={index} title={ingredient.name} ingredients={ingredient.ingredients} index={index} />
+          {ingredients_lists?.map((ingredientList, index) => (
+            <IngredientsList key={index} {...ingredientList} />
           ))}
         </div>
-        <div className="max-w-[800px] bg-secondary/30 px-4 rounded">
+        <div className="max-w-[800px] bg-secondary/30 px-4 rounded h-fit">
           <h2 className="mt-4 mb-2">Instructions</h2>
-          {instructions_lists?.map((instruction, index) => (
-            <InstructionsList
-              key={index}
-              title={instruction.name}
-              instructions={instruction.instructions}
-              index={index}
-            />
+          {instructions_lists?.map((instructionList, index) => (
+            <InstructionsList key={index} {...instructionList} />
           ))}
         </div>
       </div>
