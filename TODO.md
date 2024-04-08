@@ -5,7 +5,7 @@
 
 # Auth
 - Implement auth with supabase? -> DONE
-- Connect recipe uploads to supabase? -> UPDATE RECIPE CREATE FORM WITH NEW SCHEMA
+- Connect recipe uploads to supabase? -> UPDATE RECIPE CREATE FORM WITH NEW SCHEMA -> DONE
 
 # Account
 - Color change
@@ -16,7 +16,7 @@
 - Pagination
 
 # New Recipe
-- UPDATE TO NEW SCHEMA
+- UPDATE TO NEW SCHEMA -> DONE
 
 # Supabase
 - RLS

@@ -8,13 +8,16 @@ import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Command as CommandPrimitive } from 'cmdk';
 import { useEffect } from 'react';
 import { cn } from '@/lib/utils/utils';
+import { TagOptions } from '@/types';
 
-type Options = Record<'value' | 'label', string>;
-
+interface Options {
+  label: string;
+  value: string;
+}
 interface FancyMultiSelectProps {
-  options: Options[];
+  options: TagOptions[];
   placeholder?: string;
-  onChange?: (values: { value: string; label: string }[]) => void;
+  onChange?: (values: { label: string; value: string }[]) => void;
   key: string;
   className?: string;
 }
@@ -64,7 +67,12 @@ export const FancyMultiSelect: React.FC<FancyMultiSelectProps> = ({
     }
   }, []);
 
-  const selectables = options.filter((option) => !selected.includes(option));
+  const selectables = options.map((option) => {
+    return {
+      ...option,
+      options: option.options.filter((opt) => !selected.some((sel) => sel.value === opt.id.toString())),
+    };
+  });
 
   return (
     <Command onKeyDown={handleKeyDown} className="overflow-visible bg-transparent">
@@ -113,24 +121,27 @@ export const FancyMultiSelect: React.FC<FancyMultiSelectProps> = ({
         {open && selectables.length > 0 ? (
           <div className="absolute w-full z-10 top-0 rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
             <CommandGroup className="h-full overflow-auto">
-              {selectables.map((option) => {
-                return (
-                  <CommandItem
-                    key={option.value}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                    onSelect={(value) => {
-                      setInputValue('');
-                      setSelected((prev) => [...prev, option]);
-                    }}
-                    className={'cursor-pointer'}
-                  >
-                    {option.label}
-                  </CommandItem>
-                );
-              })}
+              {selectables.map((section) => (
+                <CommandGroup key={section.type} className="py-2 px-3">
+                  <div className="text-xs text-muted-foreground uppercase">{section.type}</div>
+                  {section.options.map((option) => (
+                    <CommandItem
+                      key={option.id}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                      }}
+                      onSelect={(value) => {
+                        setInputValue('');
+                        setSelected((prev) => [...prev, { label: value, value: option.id.toString() }]);
+                      }}
+                      className={'cursor-pointer'}
+                    >
+                      {option.name}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              ))}
             </CommandGroup>
           </div>
         ) : null}

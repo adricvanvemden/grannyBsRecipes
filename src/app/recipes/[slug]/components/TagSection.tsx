@@ -10,7 +10,7 @@ interface TagSectionProps {
 const TagSection: React.FC<TagSectionProps> = ({ title, tags, badgeColor = 'bg-accent' }) => (
   <div>
     <strong>{title}</strong>
-    <div className="flex text-nowrap">
+    <div className="flex text-nowrap gap-2">
       {tags?.map((tag, index) => (
         <Badge key={index} variant="default" className={cn('w-fit text-white', badgeColor)}>
           {tag.name}

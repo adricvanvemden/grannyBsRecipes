@@ -19,7 +19,7 @@ interface Ingredient {
   list_id: number;
   name: string;
   quantity: number;
-  metric: string;
+  unit: string;
   order: number;
 }
 
@@ -68,4 +68,9 @@ export interface RecipeData {
   instructions_lists: InstructionList[];
   tags: Tag[];
   nutrients: Nutrient[];
+}
+
+export interface TagOptions {
+  type: string;
+  options: { id: number; name: string }[];
 }

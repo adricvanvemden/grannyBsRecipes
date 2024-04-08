@@ -1,6 +1,6 @@
 'use server';
 
-import { getRecipe, getRecipeSlugs } from '@/app/actions';
+import { selectRecipe, selectRecipeSlugs } from '@/app/actions';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { BackButton } from '@/components/BackButton';
@@ -15,13 +15,13 @@ import { RecipeData } from '@/types';
 import Nutrition from './components/Nutrition';
 
 export async function generateStaticParams() {
-  return await getRecipeSlugs();
+  return await selectRecipeSlugs();
 }
 
 export default async function RecipePage({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
-  let { data: recipeData, error } = await getRecipe(slug);
+  let { data: recipeData, error } = await selectRecipe(slug);
 
   if (!recipeData) {
     notFound();
@@ -52,9 +52,8 @@ export default async function RecipePage({ params }: { params: { slug: string } 
 
       <div className="mx-auto flex flex-wrap gap-2 border-neutral border-2 w-fit p-4 rounded text-sm">
         <TagSection title="Cuisine" tags={tags.filter((tag) => tag.type === 'Cuisine')} />
-        <TagSection title="Dietary" tags={tags.filter((tag) => tag.type === 'Dietary')} />
-        <TagSection title="Type" tags={tags.filter((tag) => tag.type === 'Type')} />
-        <TagSection title="Cooking Method" tags={tags.filter((tag) => tag.type === 'Cooking Method')} />
+        <TagSection title="Diet" tags={tags.filter((tag) => tag.type === 'Diet')} />
+        <TagSection title="Ingredient" tags={tags.filter((tag) => tag.type === 'Ingredient')} />
       </div>
       {body && <p>{body}</p>}
       {/* {images && images.map((image, index) => <Image key={index} src={image} alt="" />)} */}
@@ -67,7 +66,7 @@ export default async function RecipePage({ params }: { params: { slug: string } 
             <IngredientsList key={index} {...ingredientList} />
           ))}
         </div>
-        <div className="md:sticky md:top-8 max-w-[800px] bg-secondary/30 px-4 rounded h-fit">
+        <div className="basis-2/3 md:sticky md:top-8 max-w-[800px] bg-secondary/30 px-4 rounded h-fit">
           <h2 className="mt-4 mb-2">Instructions</h2>
           {instructions_lists?.map((instructionList, index) => (
             <InstructionsList key={index} {...instructionList} />

@@ -11,22 +11,25 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
-import { create } from '@/app/actions';
+import { insertRecipe } from '@/app/actions';
 import { toast } from 'sonner';
 import { FancyMultiSelect } from '@/components/FancyMultiSelect';
-import { COOKING_METHOD_TAGS, CUISINE_TAGS, DIETARY_TAGS, MEAL_TYPE_TAGS } from '@/app/Constants';
 import { useState } from 'react';
 import { kalam } from '@/app/fonts';
+import { TagOptions } from '@/types';
+import Times from './Times';
+import Nutrients from './Nutrients';
+import { createClient } from '@/lib/utils/supabase/client';
 
 export type RecipeFormValues = z.infer<typeof recipeSchema>;
 
-function RecipeForm() {
+const RecipeForm: React.FC<{ tagOptions: TagOptions[] }> = ({ tagOptions }) => {
   const [resetKey, setResetKey] = useState<string>('');
   const form = useForm<RecipeFormValues>({
     resolver: zodResolver(recipeSchema),
     defaultValues: {
       instructions: [{ title: '', instructions: [{ instruction: '' }] }],
-      ingredients: [{ title: '', ingredients: [{ name: '', quantity: 0, metric: '' }] }],
+      ingredients: [{ title: '', ingredients: [{ name: '', quantity: 0, unit: '' }] }],
       title: '',
       shortDescription: '',
       cookingTime: 0,
@@ -34,24 +37,21 @@ function RecipeForm() {
       portions: 0,
       body: '',
       images: [],
-      cuisineTags: [],
-      mealTypeTags: [],
-      dietaryTags: [],
-      cookingMethodTags: [],
-      slug: '',
-      author: '',
+      tags: [],
     },
   });
 
   async function onSubmit(values: z.infer<typeof recipeSchema>) {
-    const { success, message } = await create(values);
+    const supabase = createClient();
+    const { data } = await supabase.auth.getUser();
+    const { data: recipe, error } = await insertRecipe(values, data?.user?.id);
 
-    if (success) {
-      toast.success('Recipe has been created');
+    if (recipe) {
+      toast.success("Recipe added to GrannyB's Recipes book!");
       form.reset({});
       setResetKey(Date.now().toString());
     } else {
-      toast.error('Error: Recipe could not be created', { description: message });
+      toast.error('Error: Could not add recipe', { description: error });
     }
   }
 
@@ -90,49 +90,14 @@ function RecipeForm() {
 
         <Ingredients form={form} />
 
-        <FormField
-          control={form.control}
-          name="cookingTime"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Cooking time</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Cooking time"
-                  type="number"
-                  min={0}
-                  {...field}
-                  onChange={(e) => field.onChange(parseInt(e.target.value))}
-                  className={kalam.className}
-                />
-              </FormControl>
-              <FormDescription className="text-secondary">in minutes</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="bg-accent/60 text-gray-800 rounded-md p-4 text-sm w-fit flex flex-col">
+          <strong>Please provide comprehensive details, ensuring consistency with the ingredients listed above.</strong>
+          <strong>Remember to align the portion size and nutrients with the ingredients and their quantities.</strong>
+        </div>
 
-        <FormField
-          control={form.control}
-          name="preparationTime"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Preparation time</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Preparation time"
-                  type="number"
-                  min={0}
-                  {...field}
-                  onChange={(e) => field.onChange(parseInt(e.target.value))}
-                  className={kalam.className}
-                />
-              </FormControl>
-              <FormDescription className="text-secondary">in minutes</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Times form={form} />
+
+        <Nutrients form={form} />
 
         <FormField
           control={form.control}
@@ -157,81 +122,15 @@ function RecipeForm() {
 
         <FormField
           control={form.control}
-          name="cuisineTags"
+          name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Cuisine</FormLabel>
+              <FormLabel>Tags</FormLabel>
               <FormControl>
                 <FancyMultiSelect
                   key={resetKey}
-                  options={CUISINE_TAGS}
-                  placeholder="Search cuisine..."
-                  onChange={(values) => {
-                    field.onChange(values.map(({ value }) => value));
-                  }}
-                  className={kalam.className}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="mealTypeTags"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Meal Type</FormLabel>
-              <FormControl>
-                <FancyMultiSelect
-                  key={resetKey}
-                  options={MEAL_TYPE_TAGS}
-                  placeholder="Search meal type..."
-                  onChange={(values) => {
-                    field.onChange(values.map(({ value }) => value));
-                  }}
-                  className={kalam.className}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="dietaryTags"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Dietary Type</FormLabel>
-              <FormControl>
-                <FancyMultiSelect
-                  key={resetKey}
-                  options={DIETARY_TAGS}
-                  placeholder="Search dietary type..."
-                  onChange={(values) => {
-                    field.onChange(values.map(({ value }) => value));
-                  }}
-                  className={kalam.className}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="cookingMethodTags"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Cooking Method</FormLabel>
-              <FormControl>
-                <FancyMultiSelect
-                  key={resetKey}
-                  options={COOKING_METHOD_TAGS}
-                  placeholder="Search cooking method..."
+                  options={tagOptions}
+                  placeholder="Search tags..."
                   onChange={(values) => {
                     field.onChange(values.map(({ value }) => value));
                   }}
@@ -276,11 +175,11 @@ function RecipeForm() {
         />
 
         <Button type="submit" className="w-full">
-          SAVE RECIPE
+          ADD RECIPE
         </Button>
       </form>
     </Form>
   );
-}
+};
 
 export default RecipeForm;

@@ -1,51 +1,134 @@
 'use server';
 import recipeSchema from '@/schemas/recipeSchema';
-import fs from 'fs';
-import path from 'path';
 import slugify from 'slugify';
 import { z } from 'zod';
 import { createClient as createServerClient } from '@/lib/utils/supabase/server';
 import { createClient } from '@/lib/utils/supabase/client';
 
-export async function create(data: z.infer<typeof recipeSchema> & { slug?: string }) {
-  // TODO: REPLACE WITH DATABASE FUNCTION
-  // ADD AUTHOR DATA (USERID)
-
-  const baseSlug = slugify(data.title, { lower: true });
-
-  let slug = baseSlug;
-  let filePath = path.join(process.cwd(), 'recipes', `${slug}.json`);
-  let i = 1;
-
-  while (fs.existsSync(filePath)) {
-    slug = `${baseSlug}-${i}`;
-    filePath = path.join(process.cwd(), 'recipes', `${slug}.json`);
-    i++;
+export async function insertRecipe(data: z.infer<typeof recipeSchema>, authorId: string | undefined) {
+  if (!authorId) {
+    throw new Error('Author ID is required');
   }
 
-  try {
-    data.slug = slug;
-    fs.writeFileSync(filePath, JSON.stringify(data));
-    return { success: true };
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log({ message: 'Error writing file', error: error.message });
-      return { success: false, message: error.message };
-    } else {
-      console.log({ message: 'Error writing file', error: 'An unknown error occurred' });
-      return { success: false, message: 'An unknown error occurred' };
-    }
+  let slug = slugify(data.title, { lower: true });
+
+  const supabase = createServerClient();
+  const { data: _slug } = await supabase.from('recipes').select('slug').match({ slug });
+
+  if (_slug && _slug?.length > 0) {
+    const randomString = Math.random().toString(36).substring(7);
+    slug = `${slug}-${randomString}`;
   }
+
+  // Insert main recipe data
+  const { data: recipeData, error: recipeError } = await supabase
+    .from('recipes')
+    .insert([
+      {
+        title: data.title,
+        short_description: data.shortDescription,
+        cooking_time: data.cookingTime,
+        preparation_time: data.preparationTime,
+        portions: data.portions,
+        body: data.body,
+        slug: slug,
+        author_id: authorId,
+      },
+    ])
+    .select();
+
+  if (!recipeData) {
+    throw new Error('Recipe data not found');
+  }
+
+  const recipeId = recipeData[0].id;
+
+  // Insert instructions
+  {
+    data.instructions.map(async (instructionList, order) => {
+      const { title, instructions } = instructionList;
+      const { data: instructionsListData } = await supabase
+        .from('instructions_lists')
+        .insert({
+          recipe_id: recipeId,
+          name: title,
+          order: order + 1,
+        })
+        .select();
+
+      if (!instructionsListData) {
+        throw new Error('Instructions list data not found');
+      }
+
+      const instructionsListId = instructionsListData[0].id;
+
+      const instructionItems = instructions.map((step, order) => ({
+        list_id: instructionsListId,
+        instruction: step.instruction,
+        order: order + 1,
+      }));
+
+      await supabase.from('instructions').insert(instructionItems);
+    });
+  }
+
+  // Insert ingredients
+  {
+    data.ingredients.map(async (ingredientList, order) => {
+      const { title, ingredients } = ingredientList;
+      const { data: ingredientsListData } = await supabase
+        .from('ingredients_lists')
+        .insert({
+          recipe_id: recipeId,
+          name: title,
+          order: order + 1,
+        })
+        .select();
+
+      if (!ingredientsListData) {
+        throw new Error('Ingredients list data not found');
+      }
+
+      const ingredientsListId = ingredientsListData[0].id;
+
+      const ingredientItems = ingredients.map((ingredient, order) => ({
+        list_id: ingredientsListId,
+        name: ingredient.name,
+        quantity: ingredient.quantity,
+        unit: ingredient.unit,
+        order: order + 1,
+      }));
+
+      await supabase.from('ingredients').insert(ingredientItems);
+    });
+  }
+
+  // Insert tags
+  {
+    const tags = data.tags.map((tag) => ({
+      recipe_id: recipeId,
+      tag_id: tag,
+    }));
+
+    await supabase.from('recipe_tags').insert(tags);
+  }
+
+  // Insert nutrients
+  if (data.nutrients) {
+    await supabase.from('nutrients').insert({ recipe_id: recipeId, ...data.nutrients });
+  }
+
+  return { data: recipeData[0], error: recipeError };
 }
 
-export async function getRecipes() {
+export async function selectRecipes() {
   const supabase = createServerClient();
   const result = await supabase.from('recipes').select('title, short_description, slug');
 
   return result;
 }
 
-export async function getRecipe(slug: string) {
+export async function selectRecipe(slug: string) {
   const supabase = createServerClient();
   const result = await supabase
     .from('recipes')
@@ -65,7 +148,7 @@ export async function getRecipe(slug: string) {
   return result;
 }
 
-export async function getRecipeSlugs() {
+export async function selectRecipeSlugs() {
   const supabase = createClient();
   const { data: slugs } = await supabase.from('recipes').select('slug');
   if (!slugs) {
@@ -74,9 +157,8 @@ export async function getRecipeSlugs() {
   return slugs?.map((slug) => slug);
 }
 
-// helpers
-
-function fileExists(slug: string): boolean {
-  const filePath = path.join(process.cwd(), 'recipes', `${slug}.json`);
-  return fs.existsSync(filePath);
+export async function selectTags() {
+  const supabase = createClient();
+  const result = await supabase.from('tags').select('*');
+  return result;
 }

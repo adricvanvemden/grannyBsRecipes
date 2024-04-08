@@ -1,10 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import useArrayForm from '@/lib/hooks/useArrayForm';
 import { ArrowDown, ArrowUp, Trash2, Plus } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { RecipeFormValues } from './Index';
 import { kalam } from '@/app/fonts';
@@ -59,21 +58,12 @@ const IngredientsItems: React.FC<IngredientsProps> = ({ form, index }) => {
           />
           <FormField
             control={form.control}
-            name={`ingredients.${index}.ingredients.${_index}.metric`}
+            name={`ingredients.${index}.ingredients.${_index}.unit`}
             render={({ field }) => (
-              <FormItem className={kalam.className}>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Metric" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="ml">ml</SelectItem>
-                    <SelectItem value="tbsp">tbsp</SelectItem>
-                    <SelectItem value="tsp">tsp</SelectItem>
-                  </SelectContent>
-                </Select>
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Unit" {...field} className={kalam.className} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -117,7 +107,7 @@ const IngredientsItems: React.FC<IngredientsProps> = ({ form, index }) => {
         size="sm"
         variant="link"
         className="text-white cursor-pointer text-xs !pl-0 w-max -mt-3"
-        onClick={() => addItem({ name: '', quantity: 0, metric: '' })}
+        onClick={() => addItem({ name: '', quantity: 0, unit: '' })}
       >
         <div className="flex">
           <Plus size={14} />

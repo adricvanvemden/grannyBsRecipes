@@ -75,7 +75,7 @@ const Ingredients: React.FC<IngredientsProps> = ({ form }) => {
         size="sm"
         variant="link"
         className="text-white cursor-pointer text-xs !pl-0 w-max -mt-3"
-        onClick={() => addItem({ title: '', ingredients: [{ name: '', quantity: 0, metric: '' }] })}
+        onClick={() => addItem({ title: '', ingredients: [{ name: '', quantity: 0, unit: '' }] })}
       >
         <div className="flex">
           <Plus size={14} />

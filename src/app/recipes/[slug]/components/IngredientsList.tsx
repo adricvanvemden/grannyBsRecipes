@@ -12,7 +12,7 @@ const IngredientsList: React.FC<IngredientList> = ({ name, ingredients }) => (
             <Checkbox id={id} className="mt-1" />
             <label htmlFor={id} className="peer-aria-checked:text-black/25 cursor-pointer text-black">
               <span>
-                <strong>{ingredient.name}</strong> {ingredient.quantity} {ingredient.metric}
+                <strong>{ingredient.name}</strong> {ingredient.quantity} {ingredient.unit}
               </span>
             </label>
           </li>
