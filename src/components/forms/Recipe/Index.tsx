@@ -15,7 +15,6 @@ import { insertRecipe } from '@/app/actions';
 import { toast } from 'sonner';
 import { FancyMultiSelect } from '@/components/FancyMultiSelect';
 import { useState } from 'react';
-import { kalam } from '@/app/fonts';
 import { TagOptions } from '@/types';
 import Times from './Times';
 import Nutrients from './Nutrients';
@@ -65,7 +64,7 @@ const RecipeForm: React.FC<{ tagOptions: TagOptions[] }> = ({ tagOptions }) => {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Title" {...field} className={kalam.className} />
+                <Input placeholder="Title" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -79,7 +78,7 @@ const RecipeForm: React.FC<{ tagOptions: TagOptions[] }> = ({ tagOptions }) => {
             <FormItem>
               <FormLabel>Short description</FormLabel>
               <FormControl>
-                <Textarea placeholder="Short description" {...field} className={kalam.className} />
+                <Textarea placeholder="Short description" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -112,7 +111,6 @@ const RecipeForm: React.FC<{ tagOptions: TagOptions[] }> = ({ tagOptions }) => {
                   min={0}
                   {...field}
                   onChange={(e) => field.onChange(parseInt(e.target.value))}
-                  className={kalam.className}
                 />
               </FormControl>
               <FormMessage />
@@ -134,7 +132,6 @@ const RecipeForm: React.FC<{ tagOptions: TagOptions[] }> = ({ tagOptions }) => {
                   onChange={(values) => {
                     field.onChange(values.map(({ value }) => value));
                   }}
-                  className={kalam.className}
                 />
               </FormControl>
               <FormMessage />
@@ -151,7 +148,7 @@ const RecipeForm: React.FC<{ tagOptions: TagOptions[] }> = ({ tagOptions }) => {
                 Body <span className="text-secondary text-xs">(optional)</span>
               </FormLabel>
               <FormControl>
-                <Textarea placeholder="Body" {...field} className={kalam.className} />
+                <Textarea placeholder="Body" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -6,7 +6,6 @@ import { ArrowDown, ArrowUp, Trash2, Plus } from 'lucide-react';
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { RecipeFormValues } from './Index';
-import { kalam } from '@/app/fonts';
 
 interface IngredientsProps {
   form: UseFormReturn<RecipeFormValues>;
@@ -30,7 +29,7 @@ const IngredientsItems: React.FC<IngredientsProps> = ({ form, index }) => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Ingredient Name" {...field} className={kalam.className} />
+                  <Input placeholder="Ingredient Name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -49,7 +48,6 @@ const IngredientsItems: React.FC<IngredientsProps> = ({ form, index }) => {
                     min={0}
                     {...field}
                     onChange={(e) => field.onChange(parseInt(e.target.value))}
-                    className={kalam.className}
                   />
                 </FormControl>
                 <FormMessage />
@@ -62,7 +60,7 @@ const IngredientsItems: React.FC<IngredientsProps> = ({ form, index }) => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Unit" {...field} className={kalam.className} />
+                  <Input placeholder="Unit" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

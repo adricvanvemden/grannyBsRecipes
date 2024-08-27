@@ -7,7 +7,7 @@ import { RecipeFormValues } from './Index';
 import { UseFormReturn } from 'react-hook-form';
 import React from 'react';
 import InstructionsItems from './InstructionsItems';
-import { kalam } from '@/app/fonts';
+
 
 interface InstructionsProps {
   form: UseFormReturn<RecipeFormValues>;
@@ -29,7 +29,7 @@ const Instructions: React.FC<InstructionsProps> = ({ form }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Instruction Set Title" {...field} className={kalam.className} />
+                    <Input placeholder="Instruction Set Title" {...field}  />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

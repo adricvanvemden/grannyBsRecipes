@@ -30,12 +30,19 @@ const config = {
         'secondary-text': 'var(--secondary-text)',
         neutral: '#6d796dff',
         primary: {
-          DEFAULT: '#6495edff',
+          DEFAULT: '#9C0AC0',
           foreground: 'var(--primary-foreground)',
         },
-        accent: {
-          DEFAULT: '#e1c4ffff',
-          foreground: 'var(--accent-foreground)',
+        secondary: {
+          DEFAULT: '#3F0544',
+          foreground: 'var(--secondary-foreground)',
+        },
+        black: {
+          DEFAULT: '#141619',
+        },
+        gray: {
+          DEFAULT: '#B3B4BD',
+          darker: '#2C2E3A',
         },
         destructive: {
           DEFAULT: '#FF0000',
@@ -44,10 +51,6 @@ const config = {
         muted: {
           DEFAULT: 'var(--muted)',
           foreground: 'var(--muted-foreground)',
-        },
-        secondary: {
-          DEFAULT: '#965456ff',
-          foreground: 'var(--secondary-foreground)',
         },
         popover: {
           DEFAULT: 'var(--popover)',

@@ -2,7 +2,6 @@
 
 import { selectRecipe, selectRecipeSlugs } from '@/app/actions';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import { BackButton } from '@/components/BackButton';
 import TimeAndServing from './components/TimeAndServing';
 import IngredientsList from './components/IngredientsList';
@@ -10,7 +9,9 @@ import TagSection from './components/TagSection';
 import InstructionsList from './components/InstructiontsList';
 import Author from './components/Author';
 import { cn } from '@/lib/utils/utils';
-import { kalam } from '@/app/fonts';
+import { Hero } from '@/components/2.0/Hero/Hero';
+import IngredientsListV2 from '@/components/2.0/IngredientsList/IngredientsList';
+import InstructionsListV2 from '@/components/2.0/InstructionsList/InstructionsList';
 import { RecipeData } from '@/types';
 import Nutrition from './components/Nutrition';
 
@@ -42,8 +43,11 @@ export default async function RecipePage({ params }: { params: { slug: string } 
   }: RecipeData = recipeData;
 
   return (
-    <div className={cn('prose max-w-[1200px] container my-6', kalam.className)}>
+    <div className={cn('prose max-w-[1200px] container my-6')}>
       <BackButton />
+      <Hero title={title} description={body} tags={tags} />
+      <IngredientsListV2 {...recipeData} />
+      <InstructionsListV2 {...recipeData} />
 
       <h1 className="mb-0 text-2xl md:text-4xl text-center">{title}</h1>
       <Author name={author.username} />
@@ -56,7 +60,7 @@ export default async function RecipePage({ params }: { params: { slug: string } 
         <TagSection title="Ingredient" tags={tags.filter((tag) => tag.type === 'Ingredient')} />
       </div>
       {body && <p>{body}</p>}
-      {/* {images && images.map((image, index) => <Image key={index} src={image} alt="" />)} */}
+
       <div className="flex flex-col md:flex-row gap-4 mt-8">
         <div className="md:sticky md:top-8 w-fit mx-auto md:min-w-[350px] md:w-fit md:max-w-[500px] bg-primary/20 p-4 pb-1 h-fit rounded">
           <TimeAndServing preparationTime={preparation_time} cookingTime={cooking_time} portions={portions} />

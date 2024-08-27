@@ -6,7 +6,7 @@ interface Author {
   username: string;
 }
 
-interface IngredientList {
+export interface IngredientList {
   id: number;
   name: string;
   recipe_id: number;
@@ -14,7 +14,7 @@ interface IngredientList {
   order: number;
 }
 
-interface Ingredient {
+export interface Ingredient {
   id: number;
   list_id: number;
   name: string;
@@ -23,7 +23,7 @@ interface Ingredient {
   order: number;
 }
 
-interface InstructionList {
+export interface InstructionList {
   id: number;
   name: string;
   recipe_id: number;
@@ -31,7 +31,7 @@ interface InstructionList {
   order: number;
 }
 
-interface instruction {
+export interface instruction {
   id: number;
   list_id: number;
   instruction: string;

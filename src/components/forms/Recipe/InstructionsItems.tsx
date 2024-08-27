@@ -5,7 +5,6 @@ import useArrayForm from '@/lib/hooks/useArrayForm';
 import { ArrowDown, ArrowUp, Minus, Plus, Trash2 } from 'lucide-react';
 import { RecipeFormValues } from './Index';
 import { UseFormReturn } from 'react-hook-form';
-import { kalam } from '@/app/fonts';
 
 interface InstructionsItemsProps {
   form: UseFormReturn<RecipeFormValues>;
@@ -29,7 +28,7 @@ const InstructionsItems: React.FC<InstructionsItemsProps> = ({ form, index }) =>
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Instruction" {...field} className={kalam.className} />
+                  <Input placeholder="Instruction" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
