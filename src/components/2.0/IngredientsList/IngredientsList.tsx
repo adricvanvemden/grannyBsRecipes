@@ -12,9 +12,9 @@ const IngredientsListV2: FC<IngredientsListProps> = ({ ingredients_lists }) => {
     <Accordion
       id="ingredients-list"
       title="Ingredients"
-      titleElement={H2}
+      titleElement="h2"
       titleClassName="text-primary m-0 inline"
-      className="p-4 bg-black text-primary rounded"
+      className="p-4 bg-black text-primary rounded w-full max-w-[800px]"
     >
       {ingredients_lists.map((section, index) => (
         <IngredientsListSection {...section} index={index} key={index} />

@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import HeroBody from './HeroBody';
-import HeroDescription from './HeroDescription';
-import HeroHeader from './HeroHeader';
-import HeroTags from './HeroTags';
-import HeroTitle from './HeroTitle';
+import HeroBody from './components/HeroBody';
+import HeroDescription from './components/HeroDescription';
+import HeroHeader from './components/HeroHeader';
+import HeroTags from './components/HeroTags';
+import HeroTitle from './components/HeroTitle';
 import { BackButton } from '@/components/BackButton';
-import HeroDivider from './HeroDivider';
+import HeroDivider from './components/HeroDivider';
 import Container from '../Container';
 import { RecipeData } from '@/types';
 
@@ -16,7 +16,7 @@ export interface HeroProps {
 }
 export const Hero: FC<HeroProps> = (props) => {
   return (
-    <Container className="bg-black rounded-lg text-gray p-6">
+    <Container className="bg-black rounded-lg text-gray p-6 max-w-[890px] mx-auto drop-shadow-lg">
       <HeroHeader>
         <BackButton />
       </HeroHeader>

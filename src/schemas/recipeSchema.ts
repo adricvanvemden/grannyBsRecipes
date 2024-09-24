@@ -11,7 +11,7 @@ const InstructionSet = z.object({
 
 const Ingredient = z.object({
   name: z.string().min(2, 'What is this? A recipe for ants? Ingredient name must be at least 2 characters long'),
-  quantity: z.number(),
+  quantity: z.string(),
   unit: z.string(),
 });
 

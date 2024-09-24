@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { HeroProps } from './Hero';
-import H1 from '../Typography/H1';
+import { HeroProps } from '../Hero';
+import H1 from '../../Typography/H1';
 
 interface HeroTitleProps extends Pick<HeroProps, 'title'> {}
 

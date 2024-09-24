@@ -59,11 +59,21 @@
 }
 
 
-/* remocve the arrow from the details summary */
+/* remove the arrow from the details summary */
 details > summary {
   list-style: none;
 }
+
 details > summary::marker, /* Latest Chrome, Edge, Firefox */ 
 details > summary::-webkit-details-marker /* Safari */ {
   display: none;
 }
+
+details > summary > svg {
+  transition: transform 200ms ease-in-out;
+}
+
+details[open] > summary >svg {
+  transform: rotate(180deg);
+}
+

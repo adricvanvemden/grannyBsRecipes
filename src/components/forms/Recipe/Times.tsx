@@ -2,7 +2,6 @@ import { UseFormReturn } from 'react-hook-form';
 import { RecipeFormValues } from './Index';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { kalam } from '@/app/fonts';
 
 interface TimesProps {
   form: UseFormReturn<RecipeFormValues>;
@@ -24,7 +23,6 @@ const Times: React.FC<TimesProps> = ({ form }) => {
                 min={0}
                 {...field}
                 onChange={(e) => field.onChange(parseInt(e.target.value))}
-                className={kalam.className}
               />
             </FormControl>
             <FormDescription className="text-secondary">in minutes</FormDescription>
@@ -46,7 +44,6 @@ const Times: React.FC<TimesProps> = ({ form }) => {
                 min={0}
                 {...field}
                 onChange={(e) => field.onChange(parseInt(e.target.value))}
-                className={kalam.className}
               />
             </FormControl>
             <FormDescription className="text-secondary">in minutes</FormDescription>

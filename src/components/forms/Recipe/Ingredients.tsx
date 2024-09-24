@@ -4,31 +4,34 @@ import { Input } from '@/components/ui/input';
 import useArrayForm from '@/lib/hooks/useArrayForm';
 import { ArrowDown, ArrowUp, Trash2, Plus } from 'lucide-react';
 import React from 'react';
-import { UseFormReturn } from 'react-hook-form';
-import { RecipeFormValues } from './Index';
+import { useFormContext } from 'react-hook-form';
 import IngredientsItems from './IngredientsItems';
 
-interface IngredientsProps {
-  form: UseFormReturn<RecipeFormValues>;
-}
-
-const Ingredients: React.FC<IngredientsProps> = ({ form }) => {
-  const { fields, addItem, deleteItem, moveItemUp, moveItemDown } = useArrayForm(form, `ingredients`);
+const Ingredients = () => {
+  const formContext = useFormContext();
+  const { fields, addItem, deleteItem, moveItemUp, moveItemDown } = useArrayForm(formContext, `ingredients`);
+  const { control } = formContext;
 
   return (
-    <div className="flex flex-col gap-4 bg-secondary/20 px-4 pt-2 pb-1">
-      <FormLabel>Ingredients</FormLabel>
+    <div className="p-4 bg-black text-primary rounded w-full">
+      <FormLabel className="text-2xl">Ingredients</FormLabel>
       {fields.map((item, index) => (
-        <div key={`${item.id}-${index}`} className="flex flex-col gap-4 border-b border-neutral pb-4">
-          <div className="grid grid-cols-[30px_1fr_120px] gap-4">
-            <span className="h-fit mt-2 text-center bg-secondary text-primary-foreground rounded">{index + 1}</span>
+        <div key={`${item.id}-${index}`} className="flex flex-col gap-2 border-b border-neutral py-2">
+          <div className="grid grid-cols-[24px_1fr_120px] gap-2">
+            <span className="h-fit text-center pt-px mt-2 bg-primary text-primary-foreground rounded text-sm aspect-square">
+              {index + 1}
+            </span>
             <FormField
-              control={form.control}
+              control={control}
               name={`ingredients.${index}.title`}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Ingredient Set Title" {...field} />
+                    <Input
+                      placeholder="Click to add title..."
+                      className="bg-transparent border-none placeholder:text-primary text-primary text-lg font-bold h-fit"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -38,8 +41,9 @@ const Ingredients: React.FC<IngredientsProps> = ({ form }) => {
               <Button
                 disabled={index === 0}
                 size="icon-md"
-                variant="outline"
-                className="p-4 cursor-pointer"
+                variant="ghost"
+                type="button"
+                className="p-4 cursor-pointer col-start-1 text-white"
                 onClick={() => moveItemUp(index)}
               >
                 <ArrowUp size={20} className="shrink-0" />
@@ -48,8 +52,9 @@ const Ingredients: React.FC<IngredientsProps> = ({ form }) => {
               <Button
                 disabled={index === fields.length - 1}
                 size="icon-md"
-                variant="outline"
-                className="p-4 cursor-pointer col-start-2"
+                variant="ghost"
+                type="button"
+                className="p-4 cursor-pointer col-start-2 text-white"
                 onClick={() => moveItemDown(index)}
               >
                 <ArrowDown size={20} className="shrink-0" />
@@ -58,27 +63,28 @@ const Ingredients: React.FC<IngredientsProps> = ({ form }) => {
               <Button
                 disabled={index === 0}
                 size="icon-md"
-                variant="outline"
-                className="p-4 cursor-pointer col-start-3"
+                variant="ghost"
+                type="button"
+                className="p-4 cursor-pointer col-start-3 text-white"
                 onClick={() => deleteItem(index)}
               >
                 <Trash2 size={20} className="shrink-0" />
               </Button>
             </div>
           </div>
-          <IngredientsItems form={form} index={index} />
+          <IngredientsItems index={index} />
         </div>
       ))}
       <Button
         asChild
         size="sm"
         variant="link"
-        className="text-white cursor-pointer text-xs !pl-0 w-max -mt-3"
+        className="text-gray cursor-pointer text-xs !pl-0 w-max"
         onClick={() => addItem({ title: '', ingredients: [{ name: '', quantity: 0, unit: '' }] })}
       >
-        <div className="flex">
+        <div className="flex gap-2">
+          Add list
           <Plus size={14} />
-          Add Ingredient Set
         </div>
       </Button>
     </div>

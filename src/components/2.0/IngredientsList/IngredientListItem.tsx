@@ -9,7 +9,7 @@ interface IngredientsListItemProps extends Ingredient {
 const IngredientsListItem: React.FC<IngredientsListItemProps> = ({ name, quantity, unit, index }) => {
   const key = `ingredients-ingredient-${index}`;
   return (
-    <label id={key} key={key} className="flex gap-2 ml-2 text-gray">
+    <label id={key} key={key} className="flex gap-2 ml-2 text-gray cursor-pointer">
       <Checkbox className="peer" />
       <span className="font-light -mt-1.5 peer-data-[state=checked]:text-gray/30">
         <span className="font-bold">{name} </span>

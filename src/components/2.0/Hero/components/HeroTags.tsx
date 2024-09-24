@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import { HeroProps } from './Hero';
+import { HeroProps } from '../Hero';
+import Container from '../../Container';
 
 interface HeroTagsProps extends Pick<HeroProps, 'tags'> {}
 const HeroTags: FC<HeroTagsProps> = ({ tags }) => {
   return (
-    <div id="hero-tags">
+    <Container id="hero-tags">
       {tags.map((tag) => (
         <span
           key={tag}
@@ -13,7 +14,7 @@ const HeroTags: FC<HeroTagsProps> = ({ tags }) => {
           {tag}
         </span>
       ))}
-    </div>
+    </Container>
   );
 };
 

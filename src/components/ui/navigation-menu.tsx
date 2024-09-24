@@ -47,7 +47,7 @@ const NavigationMenuItem = forwardRef<
 NavigationMenuItem.displayName = 'NavigationMenuItem';
 
 const navigationMenuTriggerStyle = cva(
-  'group inline-flex h-10 w-max items-center justify-cente py-2 text-primary-foreground hover:text-primary-foreground/70 font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 uppercase'
+  'group inline-flex h-10 w-max items-center justify-center py-2 text-primary-foreground hover:text-primary-foreground/70 font-medium transition-colors disabled:pointer-events-none disabled:opacity-50'
 );
 
 const NavigationMenuTrigger = forwardRef<

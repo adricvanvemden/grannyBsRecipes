@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { HeroProps } from './Hero';
+import { HeroProps } from '../Hero';
 
 interface HeroDescriptionProps extends Pick<HeroProps, 'description'> {}
 const HeroDescription: FC<HeroDescriptionProps> = ({ description }) => {

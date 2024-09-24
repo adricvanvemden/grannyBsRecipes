@@ -1,3 +1,4 @@
+'use server';
 import React from 'react';
 import { FC } from 'react';
 import Accordion from '../Accordion';
@@ -12,9 +13,9 @@ const InstructionsListV2: FC<InstructionsListProps> = ({ instructions_lists }) =
     <Accordion
       id="ingredients-list"
       title="Instructions"
-      titleElement={H2}
+      titleElement="h2"
       titleClassName="text-primary m-0 inline"
-      className="p-4 bg-black text-primary rounded"
+      className="p-4 bg-black text-primary rounded w-full max-w-[800px]"
     >
       {instructions_lists.map((section, index) => (
         <InstructionsListSection {...section} index={++index} key={index} />

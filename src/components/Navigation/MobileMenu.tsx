@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils/utils';
 import { Link } from './index';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import SignOutButton from './signOutButton';
+import Profile from './Profile';
 
 const MobileMenu: React.FC<{ links: Link[]; isLoggedIn?: boolean }> = ({ links, isLoggedIn }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +53,7 @@ const MobileMenu: React.FC<{ links: Link[]; isLoggedIn?: boolean }> = ({ links, 
       >
         <button className="mr-2 mt-3 self-end" onClick={handleOnClick}></button>
         <NavigationItems links={links} classNames="h-fit" orientation="vertical" />
-        {isLoggedIn && <SignOutButton onClick={handleOnClick} />}
+        {isLoggedIn && <Profile onClick={handleOnClick} />}
       </div>
     </>
   );

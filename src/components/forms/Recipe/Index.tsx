@@ -6,19 +6,18 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import { insertRecipe } from '@/app/actions';
 import { toast } from 'sonner';
-import { FancyMultiSelect } from '@/components/FancyMultiSelect';
 import { useState } from 'react';
 import { TagOptions } from '@/types';
-import Times from './Times';
-import Nutrients from './Nutrients';
 import { createClient } from '@/lib/utils/supabase/client';
+import { HeroInput } from '@/components/2.0/Hero/HeroInput';
+import InfoInputs from '@/components/2.0/Info/InfoInput';
+import Container from '@/components/2.0/Container';
 
 export type RecipeFormValues = z.infer<typeof recipeSchema>;
 
@@ -28,7 +27,7 @@ const RecipeForm: React.FC<{ tagOptions: TagOptions[] }> = ({ tagOptions }) => {
     resolver: zodResolver(recipeSchema),
     defaultValues: {
       instructions: [{ title: '', instructions: [{ instruction: '' }] }],
-      ingredients: [{ title: '', ingredients: [{ name: '', quantity: 0, unit: '' }] }],
+      ingredients: [{ title: '', ingredients: [{ name: '', quantity: '', unit: '' }] }],
       title: '',
       shortDescription: '',
       cookingTime: 0,
@@ -56,120 +55,36 @@ const RecipeForm: React.FC<{ tagOptions: TagOptions[] }> = ({ tagOptions }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 text-black">
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Title</FormLabel>
-              <FormControl>
-                <Input placeholder="Title" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="gap-y-8 text-black flex items-center flex-col max-w-[890px] mx-auto"
+      >
+        <HeroInput />
+        <Container className="w-full">
+          <FormField
+            control={form.control}
+            name="body"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Textarea
+                    placeholder={`# This is a title \n## This is a subtitle \nThis is a paragraph`}
+                    className="bg-transparent border-none placeholder:text-primary text-primary text-xl font-bold"
+                    rows={10}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </Container>
 
-        <FormField
-          control={form.control}
-          name="shortDescription"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Short description</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Short description" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <InfoInputs />
+
+        <Ingredients />
 
         <Instructions form={form} />
-
-        <Ingredients form={form} />
-
-        <div className="bg-accent/60 text-gray-800 rounded-md p-4 text-sm w-fit flex flex-col">
-          <strong>Please provide comprehensive details, ensuring consistency with the ingredients listed above.</strong>
-          <strong>Remember to align the portion size and nutrients with the ingredients and their quantities.</strong>
-        </div>
-
-        <Times form={form} />
-
-        <Nutrients form={form} />
-
-        <FormField
-          control={form.control}
-          name="portions"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Portion size</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Portion size"
-                  type="number"
-                  min={0}
-                  {...field}
-                  onChange={(e) => field.onChange(parseInt(e.target.value))}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="tags"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Tags</FormLabel>
-              <FormControl>
-                <FancyMultiSelect
-                  key={resetKey}
-                  options={tagOptions}
-                  placeholder="Search tags..."
-                  onChange={(values) => {
-                    field.onChange(values.map(({ value }) => value));
-                  }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="body"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Body <span className="text-secondary text-xs">(optional)</span>
-              </FormLabel>
-              <FormControl>
-                <Textarea placeholder="Body" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="images"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Images <span className="text-secondary text-xs">(optional)</span>
-              </FormLabel>
-              <FormControl>
-                <Input id="picture" type="file" multiple accept="image/png, image/jpeg, image/webp" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <Button type="submit" className="w-full">
           ADD RECIPE
